@@ -1,6 +1,7 @@
 import 'package:ecommerce/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -14,12 +15,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    Color primaryBgColor = Colors.white;
+
     return Scaffold(
       key: widget.scaffoldKey,
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: InkWell(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: InkWell(
             onTap: () {
               widget.scaffoldKey.currentState!.openDrawer();
             },
@@ -27,14 +30,17 @@ class _HomePageState extends State<HomePage> {
               icon: HugeIcons.strokeRoundedMenu02,
               color: Colors.black,
               size: 30.0,
-            )),
-        title: const Text(
-          'Elite Fashions',
-          style: TextStyle(
-            fontFamily: 'Pacifico',
-            color: Colors.black,
+            ),
           ),
         ),
+        title: Text(
+          'Veeluxe Fashion',
+          style: GoogleFonts.pacifico(
+            color: Colors.black,
+            fontSize: 25.0,
+          ),
+        ),
+        backgroundColor: primaryBgColor,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -56,26 +62,56 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     gradient: LinearGradient(
-                      begin: Alignment.topLeft,
+                      begin: Alignment.topRight,
                       colors: [
                         Colors.black.withOpacity(.4),
                         Colors.black.withOpacity(.2),
                       ],
                     ),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 30),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Autumn\nCollection\n2024',
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'SFPRO',
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 30.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'New Collection',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                        const SizedBox(
+                          width: 200,
+                          child: Text(
+                            'Discount 30% for the first transaction',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 6.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Text(
+                            'Shop Now',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -83,20 +119,20 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     'Featured Products',
                     style: TextStyle(
-                      fontFamily: 'SFPRO',
-                      fontSize: 20,
+                      color: Colors.black,
+                      fontSize: 20.0,
                     ),
                   ),
                   Text(
                     'Show All',
                     style: TextStyle(
-                      fontFamily: 'SFPRO',
-                      fontSize: 18,
                       color: Colors.grey,
+                      fontSize: 15.0,
                     ),
                   ),
                 ],
@@ -205,6 +241,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      backgroundColor: primaryBgColor,
     );
   }
 
