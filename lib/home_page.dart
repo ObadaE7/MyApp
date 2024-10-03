@@ -1,12 +1,12 @@
 import 'package:ecommerce/product_details.dart';
+import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -40,13 +40,13 @@ class _HomePageState extends State<HomePage> {
             fontSize: 25.0,
           ),
         ),
+        centerTitle: true,
         backgroundColor: primaryBgColor,
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: double.infinity,
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       colors: [
-                        Colors.black.withOpacity(.4),
+                        Colors.black.withOpacity(.2),
                         Colors.black.withOpacity(.2),
                       ],
                     ),
@@ -93,14 +93,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 15.0),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 16.0,
                             vertical: 6.0,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Colors.black.withOpacity(.8),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: const Text(
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30.0),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -128,16 +128,26 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20.0,
                     ),
                   ),
-                  Text(
-                    'Show All',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15.0,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'View All',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                      SizedBox(width: 5.0),
+                      HugeIcon(
+                        icon: HugeIcons.strokeRoundedArrowRight01,
+                        color: Colors.grey,
+                        size: 20.0,
+                      ),
+                    ],
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15.0),
               SizedBox(
                 height: 300,
                 child: ListView(
@@ -147,12 +157,12 @@ class _HomePageState extends State<HomePage> {
                       'images/products/p1.png',
                       'Men\'s Hoodie',
                       '\$9.99',
+                      isFavorite: true,
                     ),
                     featuredProductsCard(
                       'images/products/p2.png',
                       'Sweatshirt',
                       '\$4.59',
-                      isFavorite: true,
                     ),
                     featuredProductsCard(
                       'images/products/p3.png',
@@ -182,63 +192,109 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      drawer: Drawer(
-        backgroundColor: Colors.white,
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage('images/avatars/avatar.jpg'),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Obada Daraghmeh',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Acme',
+      drawer: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(50.0),
+          bottomRight: Radius.circular(50.0),
+        ),
+        child: Drawer(
+          backgroundColor: primaryBgColor,
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    const DrawerHeader(
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage(
+                                'images/avatars/avatar_male_memoji.png'),
+                          ),
+                          Text(
+                            'Obada Daraghmeh',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '@Obada7.e',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    ListTile(
+                      leading: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedHome01,
+                        color: Colors.black,
+                      ),
+                      title: const Text('Home page'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedShoppingBag01,
+                        color: Colors.black,
+                      ),
+                      title: const Text('My Cart'),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      leading: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedFavourite,
+                        color: Colors.black,
+                      ),
+                      title: const Text('Wish List'),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      leading: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedUser,
+                        color: Colors.black,
+                      ),
+                      title: const Text('My profile'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Profile(),
+                          ),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: const HugeIcon(
+                        icon: HugeIcons.strokeRoundedSettings01,
+                        color: Colors.black,
+                      ),
+                      title: const Text('Settings'),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home page'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.shopping_cart),
-              title: const Text('My Cart'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.favorite_rounded),
-              title: const Text('Whish List'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.person_3_sharp),
-              title: const Text('My profile'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {},
-            ),
-          ],
+              ListTile(
+                leading: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedLogout02,
+                  color: Colors.black,
+                ),
+                title: const Text('Logout'),
+                onTap: () {},
+              ),
+            ],
+          ),
         ),
       ),
       backgroundColor: primaryBgColor,

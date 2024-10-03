@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -13,35 +15,32 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          borderRadius: BorderRadius.circular(20),
           onTap: () {
             Navigator.pop(context);
           },
-          child: const Icon(
-            Icons.chevron_left,
-            size: 30,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.favorite_outline_rounded,
-                  color: Colors.black,
-                  size: 25,
-                ),
-                SizedBox(width: 15),
-                Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.grey[200],
+              ),
+              child: const HugeIcon(
+                icon: HugeIcons.strokeRoundedArrowLeft01,
+                color: Colors.black,
+                size: 30.0,
+              ),
             ),
           ),
-        ],
+        ),
+        title: Text(
+          'Details',
+          style: GoogleFonts.pacifico(
+            color: Colors.black,
+            fontSize: 25.0,
+          ),
+        ),
+        centerTitle: true,
         backgroundColor: Colors.grey[100],
       ),
       body: SingleChildScrollView(
@@ -59,8 +58,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
+                  topLeft: Radius.circular(35.0),
+                  topRight: Radius.circular(35.0),
                 ),
                 color: Colors.white,
                 boxShadow: [
@@ -80,8 +79,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Icon(
-                          Icons.star,
+                        const HugeIcon(
+                          icon: HugeIcons.strokeRoundedStar,
                           color: Colors.orange,
                         ),
                         const SizedBox(width: 5),
@@ -281,9 +280,9 @@ class _ProductDetailsState extends State<ProductDetails> {
             backgroundColor: Colors.white,
             foregroundColor: Colors.indigoAccent,
             onPressed: () {},
-            child: const Icon(
-              Icons.shopping_cart_outlined,
-              size: 25,
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedShoppingBag01,
+              color: Colors.indigoAccent,
             ),
           ),
           const SizedBox(width: 10),
