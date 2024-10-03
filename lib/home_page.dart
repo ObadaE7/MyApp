@@ -1,8 +1,11 @@
 import 'package:ecommerce/product_details.dart';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -12,46 +15,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: widget.scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        // leading: const Padding(
-        //   padding: EdgeInsets.only(left: 20.0),
-        //   child: Icon(
-        //     Icons.menu,
-        //     color: Colors.black,
-        //     size: 30,
-        //   ),
-        // ),
-        title: const Center(
-          child: Text(
-            'Elite Fashions',
-            style: TextStyle(
-              fontFamily: 'Pacifico',
+        leading: InkWell(
+            onTap: () {
+              widget.scaffoldKey.currentState!.openDrawer();
+            },
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedMenu02,
               color: Colors.black,
-            ),
+              size: 30.0,
+            )),
+        title: const Text(
+          'Elite Fashions',
+          style: TextStyle(
+            fontFamily: 'Pacifico',
+            color: Colors.black,
           ),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.favorite_outline_rounded,
-                  color: Colors.black,
-                  size: 25,
-                ),
-                SizedBox(width: 15),
-                Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -194,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const HomePage(),
+                    builder: (context) => HomePage(),
                   ),
                 );
               },
@@ -286,19 +269,18 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+                  padding: const EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    color: Colors.indigoAccent,
                   ),
-                  color: Colors.indigoAccent,
-                ),
-                width: 120,
-                child: const Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.white,
-                ),
-              ),
+                  width: 120,
+                  child: const HugeIcon(
+                    icon: HugeIcons.strokeRoundedShoppingBag01,
+                    color: Colors.white,
+                  )),
               const SizedBox(width: 10),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -309,12 +291,12 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey[200],
                 ),
                 child: isFavorite
-                    ? const Icon(
-                        Icons.favorite_rounded,
+                    ? const HugeIcon(
+                        icon: HugeIcons.strokeRoundedFavourite,
                         color: Colors.red,
                       )
-                    : const Icon(
-                        Icons.favorite_border_rounded,
+                    : const HugeIcon(
+                        icon: HugeIcons.strokeRoundedFavourite,
                         color: Colors.black,
                       ),
               ),
