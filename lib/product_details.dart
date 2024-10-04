@@ -273,38 +273,38 @@ class _ProductDetailsState extends State<ProductDetails> {
           ],
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FloatingActionButton(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.indigoAccent,
-            onPressed: () {},
-            child: const HugeIcon(
-              icon: HugeIcons.strokeRoundedShoppingBag01,
-              color: Colors.indigoAccent,
-            ),
-          ),
-          const SizedBox(width: 10),
-          SizedBox(
-            width: 300,
-            child: FloatingActionButton(
-              backgroundColor: Colors.indigoAccent,
-              foregroundColor: Colors.white,
-              onPressed: () {},
-              child: const Text(
-                'Buy Now',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontFamily: 'Acme',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: Row(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     FloatingActionButton(
+      //       backgroundColor: Colors.white,
+      //       foregroundColor: Colors.indigoAccent,
+      //       onPressed: () {},
+      //       child: const HugeIcon(
+      //         icon: HugeIcons.strokeRoundedShoppingBag01,
+      //         color: Colors.indigoAccent,
+      //       ),
+      //     ),
+      //     const SizedBox(width: 10),
+      //     SizedBox(
+      //       width: 300,
+      //       child: FloatingActionButton(
+      //         backgroundColor: Colors.indigoAccent,
+      //         foregroundColor: Colors.white,
+      //         onPressed: () {},
+      //         child: const Text(
+      //           'Buy Now',
+      //           style: TextStyle(
+      //             fontSize: 18,
+      //             fontFamily: 'Acme',
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: Colors.grey[100],
     );
   }
