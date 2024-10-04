@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -18,30 +18,19 @@ class _ProductDetailsState extends State<ProductDetails> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: Colors.grey[200],
-              ),
-              child: const HugeIcon(
-                icon: HugeIcons.strokeRoundedArrowLeft01,
-                color: Colors.black,
-                size: 30.0,
-              ),
-            ),
+          child: const Icon(
+            IconsaxPlusLinear.arrow_left_3,
+            color: Colors.black,
+            size: 30,
           ),
         ),
-        title: Text(
-          'Details',
-          style: GoogleFonts.pacifico(
+        title: const Text(
+          'Product Details',
+          style: TextStyle(
             color: Colors.black,
-            fontSize: 25.0,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.grey[100],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -50,8 +39,9 @@ class _ProductDetailsState extends State<ProductDetails> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage('images/products/p1.png'),
-                  height: 250,
+                  image: AssetImage('images/products/clothes/clothe-2.png'),
+                  height: 300,
+                  fit: BoxFit.cover,
                 ),
               ],
             ),

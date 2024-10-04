@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
 class Profile extends StatefulWidget {
@@ -13,57 +12,53 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            IconsaxPlusLinear.arrow_left_3,
+            color: Colors.black,
+            size: 30,
+          ),
+        ),
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
-          Stack(children: [
-            Container(
-              height: 200,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-              ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage:
-                        AssetImage('images/avatars/avatar_male_memoji.png'),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Obada Daraghmeh',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+          Container(
+            height: 200,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
             ),
-            Positioned(
-              top: 20,
-              left: 20,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(0.7),
-                  ),
-                  child: const Icon(
-                    IconsaxPlusLinear.arrow_left_3,
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage:
+                      AssetImage('images/avatars/avatar_male_memoji.png'),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  'Obada Daraghmeh',
+                  style: TextStyle(
                     color: Colors.black,
-                    size: 30,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
+              ],
             ),
-          ]),
+          ),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20.0),

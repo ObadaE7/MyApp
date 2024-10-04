@@ -366,16 +366,28 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              height: 200.0,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                                color: Colors.deepPurpleAccent.withOpacity(.1),
-                              ),
-                              child: Image.asset(
-                                'images/products/clothes/clothe-${index + 1}.png',
-                                fit: BoxFit.contain,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProductDetails(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 200.0,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  color:
+                                      Colors.deepPurpleAccent.withOpacity(.1),
+                                ),
+                                child: Image.asset(
+                                  'images/products/clothes/clothe-${index + 1}.png',
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                             const Padding(
