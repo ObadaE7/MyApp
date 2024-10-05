@@ -29,34 +29,41 @@ class _ProfileState extends State<Profile> {
             color: Colors.black,
           ),
         ),
-        centerTitle: true,
       ),
       body: ListView(
         children: [
-          Container(
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.grey[100],
-            ),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage:
-                      AssetImage('images/avatars/avatar_male_memoji.png'),
-                ),
-                SizedBox(height: 10.0),
-                Text(
-                  'Obada Daraghmeh',
-                  style: TextStyle(
+          Stack(
+            alignment: Alignment.center,
+            clipBehavior: Clip.none,
+            children: [
+              const CircleAvatar(
+                radius: 60.0,
+                backgroundImage:
+                    AssetImage('images/avatars/avatar_male_memoji.png'),
+              ),
+              Positioned(
+                bottom: -5.0,
+                right: 150.0,
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
                     color: Colors.black,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+                  ),
+                  child: const Icon(
+                    IconsaxPlusLinear.camera,
+                    size: 25.0,
+                    color: Colors.white,
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 20.0),
+          SizedBox(
+            width: double.infinity,
+            child: Divider(
+              color: Colors.grey[200],
             ),
           ),
           Container(
@@ -68,99 +75,70 @@ class _ProfileState extends State<Profile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Username',
+                      'Profile Information',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      height: 60.0,
+                    const SizedBox(height: 15.0),
+                    _buildRow('Name', 'Obada Daraghmeh'),
+                    _buildRow('Username', 'Obada7.e'),
+                    const SizedBox(height: 20.0),
+                    SizedBox(
                       width: double.infinity,
-                      padding: const EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.grey[100],
-                      ),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Obada7.e',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
+                      child: Divider(
+                        color: Colors.grey[200],
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 10.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                    const SizedBox(height: 20.0),
                     const Text(
-                      'Full Name',
+                      'Personal Information',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      height: 60.0,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.grey[100],
-                      ),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Obada Daraghmeh',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Email',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Container(
-                      height: 60.0,
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.grey[100],
-                      ),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'obada.e.amer@gmail.com',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ),
-                    ),
+                    const SizedBox(height: 15.0),
+                    _buildRow('E-mail', 'obada.e.amer@gmail.com'),
+                    _buildRow('Phone Number', '0597589712'),
+                    _buildRow('Gender', 'Male'),
+                    _buildRow('Date of Birth', '08 May, 2000'),
                   ],
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRow(String title, String info) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.grey,
+              fontSize: 20.0,
+            ),
+          ),
+          Text(
+            info,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+            ),
+          ),
+          const Icon(
+            IconsaxPlusLinear.arrow_right_3,
+            color: Colors.black,
           ),
         ],
       ),

@@ -25,12 +25,29 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
         ),
         title: const Text(
-          'Product Details',
+          'Details',
           style: TextStyle(
             color: Colors.black,
           ),
         ),
-        centerTitle: true,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: Row(
+              children: [
+                HugeIcon(
+                  icon: HugeIcons.strokeRoundedShare01,
+                  color: Colors.black,
+                ),
+                SizedBox(width: 20.0),
+                Icon(
+                  IconsaxPlusLinear.heart,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -69,9 +86,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const HugeIcon(
-                          icon: HugeIcons.strokeRoundedStar,
-                          color: Colors.orange,
+                        const Icon(
+                          IconsaxPlusBold.star,
+                          color: Colors.amber,
+                          size: 30,
                         ),
                         const SizedBox(width: 5),
                         const Text(
