@@ -15,10 +15,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Color primaryBgColor = Colors.grey[50]!;
-
+    Color primaryBgColor = Colors.white;
     return Scaffold(
       key: widget.scaffoldKey,
+      backgroundColor: primaryBgColor,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20.0),
@@ -36,9 +36,11 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Container(
                         padding: const EdgeInsets.all(15.0),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                          color: Colors.grey.shade100,
                         ),
                         child: const HugeIcon(
                           icon: HugeIcons.strokeRoundedMenu02,
@@ -75,9 +77,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(15.0),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15.0),
+                        ),
+                        color: Colors.grey.shade100,
                       ),
                       child: const Icon(
                         IconsaxPlusLinear.shopping_cart,
@@ -102,10 +106,10 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.normal,
                   ),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: Colors.grey.shade100,
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                     vertical: 15,
@@ -128,68 +132,60 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0,
-                              vertical: 10.0,
+                          Text(
+                            'Discount',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
                             ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.0),
-                              color: Colors.white.withOpacity(.1),
+                          ),
+                          Text(
+                            '50%',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                              height: 1,
                             ),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Discount',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                                Text(
-                                  '50%',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1,
-                                  ),
-                                ),
-                                Text(
-                                  'OFF',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.bold,
-                                    height: 1,
-                                  ),
-                                ),
-                              ],
+                          ),
+                          Text(
+                            'OFF',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                              height: 1,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(width: 40.0),
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
-                          Image(
+                          Container(
+                            width: 120.0,
+                            height: 120.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white.withOpacity(.1),
+                            ),
+                          ),
+                          const Image(
                             image:
                                 AssetImage('images/products/shoes/shoes-3.png'),
-                            width: 150,
-                            height: 120,
-                            fit: BoxFit.cover,
+                            width: 160,
+                            height: 160,
+                            fit: BoxFit.contain,
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -201,120 +197,30 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin: const EdgeInsets.only(right: 15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white,
-                      ),
-                      child: const Row(
-                        children: [
-                          HugeIcon(
-                            icon: HugeIcons.strokeRoundedDashboardSquare02,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                          SizedBox(width: 10.0),
-                          Text(
-                            'ALL',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          )
-                        ],
-                      ),
+                    _buildCategoryRow(
+                      HugeIcons.strokeRoundedDashboardSquare02,
+                      'All items',
+                      isActive: true,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin: const EdgeInsets.only(right: 15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white,
-                      ),
-                      child: const Row(
-                        children: [
-                          HugeIcon(
-                            icon: HugeIcons.strokeRoundedRunningShoes,
-                            color: Colors.black,
-                          ),
-                          SizedBox(width: 10.0),
-                          Text(
-                            'FOOTWEAR',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          )
-                        ],
-                      ),
+                    _buildCategoryRow(
+                      HugeIcons.strokeRoundedRunningShoes,
+                      'Footwear',
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin: const EdgeInsets.only(right: 15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white,
-                      ),
-                      child: const Row(
-                        children: [
-                          HugeIcon(
-                            icon: HugeIcons.strokeRoundedWatch01,
-                            color: Colors.black,
-                          ),
-                          SizedBox(width: 10.0),
-                          Text(
-                            'WATCHES',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          )
-                        ],
-                      ),
+                    _buildCategoryRow(
+                      HugeIcons.strokeRoundedWatch01,
+                      'Watches',
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin: const EdgeInsets.only(right: 15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white,
-                      ),
-                      child: const Row(
-                        children: [
-                          HugeIcon(
-                            icon: HugeIcons.strokeRoundedSofaSingle,
-                            color: Colors.black,
-                          ),
-                          SizedBox(width: 10.0),
-                          Text(
-                            'FURNITURE',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          )
-                        ],
-                      ),
+                    _buildCategoryRow(
+                      HugeIcons.strokeRoundedSofaSingle,
+                      'Furniture',
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin: const EdgeInsets.only(right: 15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.white,
-                      ),
-                      child: const Row(
-                        children: [
-                          HugeIcon(
-                            icon: HugeIcons.strokeRoundedHoodie,
-                            color: Colors.black,
-                          ),
-                          SizedBox(width: 10.0),
-                          Text(
-                            'CLOTHING',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          )
-                        ],
-                      ),
+                    _buildCategoryRow(
+                      HugeIcons.strokeRoundedSofaSingle,
+                      'Furniture',
+                    ),
+                    _buildCategoryRow(
+                      HugeIcons.strokeRoundedHoodie,
+                      'Clothing',
                     ),
                   ],
                 ),
@@ -329,14 +235,14 @@ class _HomePageState extends State<HomePage> {
                     'Popular',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20.0,
+                      fontSize: 24.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'View All',
                     style: TextStyle(
-                      color: Colors.deepPurpleAccent,
+                      color: Colors.grey,
                       fontSize: 16.0,
                     ),
                   ),
@@ -344,9 +250,6 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 20.0),
               GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
                 itemCount: 6,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -360,11 +263,10 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          color: Colors.white,
+                          color: Colors.deepPurpleAccent.withOpacity(.1),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             InkWell(
                               onTap: () {
@@ -376,36 +278,32 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 );
                               },
-                              child: Container(
-                                height: 200.0,
+                              child: Image.asset(
+                                'images/products/clothes/clothe-${index + 1}.png',
                                 width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  color:
-                                      Colors.deepPurpleAccent.withOpacity(.1),
-                                ),
-                                child: Image.asset(
-                                  'images/products/clothes/clothe-${index + 1}.png',
-                                  fit: BoxFit.contain,
-                                ),
+                                height: 200.0,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.all(10.0),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                              ),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     'Hoodie',
                                     style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18.0,
+                                      color: Colors.grey.shade700,
+                                      fontSize: 20.0,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     '\$25.00',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 20.0,
+                                      fontSize: 22.0,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -416,38 +314,26 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Positioned(
-                        top: 10.0,
+                        bottom: 25.0,
                         right: 10.0,
                         child: Container(
                           padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.white.withOpacity(.5),
+                            shape: BoxShape.circle,
+                            color: Colors.red.withOpacity(.2),
                           ),
                           child: const Icon(
-                            IconsaxPlusLinear.heart,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 10.0,
-                        right: 10.0,
-                        child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            color: Colors.deepPurpleAccent.withOpacity(.8),
-                          ),
-                          child: const Icon(
-                            IconsaxPlusLinear.shopping_cart,
-                            color: Colors.white,
+                            IconsaxPlusBold.heart,
+                            color: Colors.red,
                           ),
                         ),
                       ),
                     ],
                   );
                 },
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
               ),
             ],
           ),
@@ -597,6 +483,33 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryRow(IconData icon, String name, {isActive = false}) {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.only(right: 15.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.grey.shade100),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Row(
+        children: [
+          HugeIcon(
+            icon: icon,
+            color: isActive ? Colors.deepPurpleAccent : Colors.black,
+          ),
+          const SizedBox(width: 10.0),
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 20.0,
+            ),
+          )
+        ],
       ),
     );
   }
