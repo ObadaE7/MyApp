@@ -1,14 +1,15 @@
 import 'package:ecommerce/product_details.dart';
 import 'package:ecommerce/profile.dart';
+// import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:iconly/iconly.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final GlobalKey<CurvedNavigationBarState> bottomNavigationKey = GlobalKey();
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    int _bottomNavigationBarIndex = 2;
+    int bottomNavigationBarIndex = 2;
 
     Color lightBgColor = Colors.white;
     Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
@@ -24,39 +25,46 @@ class _HomePageState extends State<HomePage> {
     // Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);
     Color secondaryLight = const Color.fromRGBO(242, 241, 235, 1);
     Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
+    Color secondaryDark = Color(0xFF17203A);
 
+    // Categories
     List<String> categoriesName = [
       'All',
-      'Clothing',
+      'Hoodies',
+      'T-Shirts',
+      'Shirts',
+      'Pants',
+      'Glasses',
       'Watches',
-      'Footwear',
-      'Furniture',
     ];
 
     List<IconData> categoriesIcon = [
       HugeIcons.strokeRoundedDashboardSquare02,
       HugeIcons.strokeRoundedHoodie,
+      HugeIcons.strokeRoundedShirt01,
+      HugeIcons.strokeRoundedTShirt,
+      HugeIcons.strokeRoundedJoggerPants,
+      HugeIcons.strokeRoundedGlasses,
       HugeIcons.strokeRoundedWatch01,
-      HugeIcons.strokeRoundedRunningShoes,
-      HugeIcons.strokeRoundedSofaSingle,
+    ];
+
+    // Popular products
+    List<String> productsName = [
+      'Black hoodie',
+      'Hawaiian shirt isolated',
+      'Plain dark green t-shirt',
+      'Light green front sunglasses with black',
+      'Rolex Yacht-Master',
+      'Cargo pants men with plain isolated',
     ];
 
     List<String> productsImage = [
-      'images/products/clothes/clothe-1.png',
-      'images/products/shoes/shoes-2.png',
-      'images/products/furniture/furniture-6.png',
-      'images/products/clothes/clothe-4.png',
-      'images/products/shoes/shoes-13.png',
-      'images/products/watches/watch-6.png',
-    ];
-
-    List<String> productsName = [
-      'Men\'s hoodie',
-      'Nike Lunar',
-      'Wing chair',
-      'Long-sleeved T-shirt',
-      'Woman high heel shoes',
-      'Rolex watch',
+      'images/products/hoodies/hoodie-1.png',
+      'images/products/shirts/shirt-4.png',
+      'images/products/t-shirts/t-shirt-5.png',
+      'images/products/glasses/glasses-3.png',
+      'images/products/watches/watch-2.png',
+      'images/products/pants/pants-4.png',
     ];
 
     List<String> productsPrice = [
@@ -68,6 +76,21 @@ class _HomePageState extends State<HomePage> {
       '\$29.35',
     ];
 
+    // Drawer items
+    List<IconData> drawerItemsIcon = [
+      HugeIcons.strokeRoundedUser,
+      HugeIcons.strokeRoundedTruckDelivery,
+      HugeIcons.strokeRoundedSettings05,
+      IconlyLight.logout,
+    ];
+
+    List<String> drawerItemsLabel = [
+      'Profile',
+      'Orders',
+      'Settings',
+      'Logout',
+    ];
+
     return Scaffold(
       key: widget.scaffoldKey,
       backgroundColor: lightBgColor,
@@ -75,7 +98,7 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           icon: HugeIcon(
             icon: HugeIcons.strokeRoundedMenu02,
-            color: primaryDark,
+            color: secondaryDark,
           ),
           tooltip: 'Open Drawer',
           onPressed: () {
@@ -95,7 +118,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
-                  IconsaxPlusBold.location,
+                  IconlyBroken.location,
                   color: Colors.orangeAccent,
                   size: 20,
                 ),
@@ -103,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   'Tubas, Palestine',
                   style: TextStyle(
-                    color: primaryDark,
+                    color: secondaryDark,
                     fontSize: 18.0,
                   ),
                 ),
@@ -112,14 +135,20 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         centerTitle: true,
-        actions: const [
+        actions: [
           Padding(
             padding: EdgeInsets.only(
               right: 20.0,
             ),
-            child: CircleAvatar(
-              radius: 20.0,
-              backgroundImage: AssetImage('images/avatars/avatar.jpg'),
+            child: Container(
+              height: 45.0,
+              width: 45.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.0),
+                image: DecorationImage(
+                  image: AssetImage('images/avatars/avatar.jpg'),
+                ),
+              ),
             ),
           ),
         ],
@@ -134,23 +163,23 @@ class _HomePageState extends State<HomePage> {
               TextField(
                 decoration: InputDecoration(
                   prefixIcon: Icon(
-                    IconsaxPlusLinear.search_normal,
-                    color: primaryDark,
+                    IconlyLight.search,
+                    color: secondaryDark,
                   ),
                   hintText: 'Looking for something?',
                   hintStyle: TextStyle(
-                    color: primaryDark.withOpacity(.4),
+                    color: secondaryDark.withOpacity(.4),
                     fontSize: 20.0,
                     fontWeight: FontWeight.normal,
                   ),
                   filled: true,
-                  fillColor: secondaryLight,
+                  fillColor: secondaryLight.withOpacity(.5),
                   border: OutlineInputBorder(
                     borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15,
+                    vertical: 16.0,
                   ),
                 ),
               ),
@@ -160,10 +189,10 @@ class _HomePageState extends State<HomePage> {
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    width: double.infinity,
                     height: 170,
+                    width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(16.0),
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.bottomCenter,
@@ -202,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                                     vertical: 8.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderRadius: BorderRadius.circular(16.0),
                                     color: primaryDark.withOpacity(.5),
                                   ),
                                   child: const Text(
@@ -225,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                     top: -50,
                     right: -70,
                     child: Image(
-                      image: AssetImage('images/sale.png'),
+                      image: AssetImage('images/illustrations/sale-50.png'),
                       width: 300,
                       height: 250,
                       fit: BoxFit.contain,
@@ -275,7 +304,6 @@ class _HomePageState extends State<HomePage> {
                 itemCount: productsName.length <= 6 ? productsName.length : 6,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 20.0,
                   crossAxisSpacing: 20.0,
                   mainAxisExtent: 280.0,
                 ),
@@ -298,164 +326,138 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: StatefulBuilder(
         builder: (context, setState) {
           return CurvedNavigationBar(
-            key: widget._bottomNavigationKey,
+            key: widget.bottomNavigationKey,
             buttonBackgroundColor: primaryGreen,
             backgroundColor: Colors.transparent,
-            color: Color(0xFF17203A),
+            color: secondaryDark,
             animationCurve: Curves.easeInOutCubicEmphasized,
-            index: _bottomNavigationBarIndex,
+            index: bottomNavigationBarIndex,
             items: <Widget>[
               Icon(
-                IconsaxPlusLinear.heart,
+                IconlyLight.bag,
                 size: 30,
                 color:
-                    _bottomNavigationBarIndex == 0 ? primaryDark : primaryGreen,
+                    bottomNavigationBarIndex == 1 ? primaryDark : primaryGreen,
               ),
               Icon(
-                IconsaxPlusLinear.shopping_cart,
+                IconlyLight.heart,
                 size: 30,
                 color:
-                    _bottomNavigationBarIndex == 1 ? primaryDark : primaryGreen,
+                    bottomNavigationBarIndex == 0 ? primaryDark : primaryGreen,
               ),
               Icon(
-                IconsaxPlusLinear.home,
+                IconlyLight.home,
                 size: 30,
                 color:
-                    _bottomNavigationBarIndex == 2 ? primaryDark : primaryGreen,
-              ),
-              HugeIcon(
-                icon: HugeIcons.strokeRoundedNotification01,
-                size: 30,
-                color:
-                    _bottomNavigationBarIndex == 3 ? primaryDark : primaryGreen,
+                    bottomNavigationBarIndex == 2 ? primaryDark : primaryGreen,
               ),
               Icon(
-                IconsaxPlusLinear.user,
+                IconlyLight.notification,
                 size: 30,
                 color:
-                    _bottomNavigationBarIndex == 4 ? primaryDark : primaryGreen,
+                    bottomNavigationBarIndex == 3 ? primaryDark : primaryGreen,
+              ),
+              Icon(
+                IconlyLight.profile,
+                size: 30,
+                color:
+                    bottomNavigationBarIndex == 4 ? primaryDark : primaryGreen,
               ),
             ],
             onTap: (index) {
               setState(() {
-                _bottomNavigationBarIndex = index;
+                bottomNavigationBarIndex = index;
               });
             },
           );
         },
       ),
-      drawer: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(50.0),
-          bottomRight: Radius.circular(50.0),
-        ),
-        child: Drawer(
-          backgroundColor: lightBgColor,
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    const DrawerHeader(
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage: AssetImage(
-                                'images/avatars/avatar_male_memoji.png'),
+      drawer: Stack(
+        children: [
+          Drawer(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(50.0),
+                bottomRight: Radius.circular(50.0),
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: lightBgColor,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(50.0),
+                  bottomRight: Radius.circular(50.0),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      top: 40,
+                      right: 16,
+                      bottom: 16,
+                      left: 16,
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: secondaryGreen,
+                              width: 5,
+                            ),
                           ),
-                          Text(
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage:
+                                AssetImage('images/avatars/avatar.jpg'),
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
                             'Obada Daraghmeh',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            '@Obada7.e',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    ListTile(
-                      leading: const Icon(
-                        IconsaxPlusLinear.user,
-                        color: Colors.black,
-                      ),
-                      title: const Text('Profile'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Profile(),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        IconsaxPlusLinear.home,
-                        color: Colors.black,
-                      ),
-                      title: const Text('Home Page'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        IconsaxPlusLinear.shopping_cart,
-                        color: Colors.black,
-                      ),
-                      title: const Text('My Cart'),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: const Icon(
-                        IconsaxPlusLinear.heart,
-                        color: Colors.black,
-                      ),
-                      title: const Text('Favorites'),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: const HugeIcon(
-                        icon: HugeIcons.strokeRoundedTruckDelivery,
-                        color: Colors.black,
-                      ),
-                      title: const Text('Orders'),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: const HugeIcon(
-                        icon: HugeIcons.strokeRoundedNotification03,
-                        color: Colors.black,
-                      ),
-                      title: const Text('Notifications'),
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemCount: drawerItemsLabel.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Icon(
+                          drawerItemsIcon[index],
+                          color: Colors.black,
+                        ),
+                        title: Text(drawerItemsLabel[index]),
+                        onTap: () {
+                          index == 0
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Profile(),
+                                  ),
+                                )
+                              : null;
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-              ListTile(
-                leading: const Icon(
-                  IconsaxPlusLinear.logout,
-                  color: Colors.black,
-                ),
-                title: const Text('Logout'),
-                onTap: () {},
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -568,7 +570,7 @@ class _HomePageState extends State<HomePage> {
               color: primaryGreen.withOpacity(.2),
             ),
             child: Icon(
-              IconsaxPlusBold.heart,
+              IconlyBold.heart,
               color: isFavorite ? primaryGreen : primaryLight,
             ),
           ),

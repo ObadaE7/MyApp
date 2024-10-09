@@ -37,8 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   hugeicons: ^0.0.7
   google_fonts: ^6.2.1
-  iconsax_plus: ^1.0.0
   curved_navigation_bar: ^1.0.6
+  iconly: ^1.0.1
+  dotted_line: ^3.2.2
 
 dev_dependencies:
   flutter_test:
@@ -64,11 +65,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/
     - images/avatars/
-    - images/products/clothes/
+    - images/illustrations/
+    - images/products/glasses/
+    - images/products/hoodies/
+    - images/products/pants/
+    - images/products/shirts/
     - images/products/shoes/
-    - images/products/furniture/
+    - images/products/t-shirts/
     - images/products/watches/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,147 +1,195 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:iconly/iconly.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  Profile({super.key});
+  final GlobalKey<CurvedNavigationBarState> bottomNavigationKey = GlobalKey();
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  int bottomNavigationBarIndex = 2;
+
+  Color lightBgColor = Colors.white;
+  Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
+  Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
+  Color secondaryDark = Color(0xFF17203A);
+
+  List<String> items = [
+    'Account',
+    'Security',
+    'Address',
+    'Wallet',
+    'Orders',
+    'Settings',
+    'Logout',
+  ];
+
+  List<IconData> icons = [
+    IconlyLight.profile,
+    HugeIcons.strokeRoundedLockPassword,
+    IconlyLight.location,
+    HugeIcons.strokeRoundedWallet02,
+    HugeIcons.strokeRoundedTruckDelivery,
+    IconlyLight.filter,
+    IconlyLight.logout,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
+        leading: IconButton(
+          icon: Icon(
+            HugeIcons.strokeRoundedArrowLeft04,
+            size: 30.0,
+          ),
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: const Icon(
-            IconsaxPlusLinear.arrow_left_3,
-            color: Colors.black,
-            size: 30,
-          ),
         ),
-        title: const Text(
+        title: Text(
           'Profile',
-          style: TextStyle(
-            color: Colors.black,
-          ),
         ),
+        centerTitle: true,
+        backgroundColor: lightBgColor,
       ),
-      body: ListView(
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              const CircleAvatar(
-                radius: 60.0,
-                backgroundImage:
-                    AssetImage('images/avatars/avatar_male_memoji.png'),
-              ),
-              Positioned(
-                bottom: -5.0,
-                right: 150.0,
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  child: const Icon(
-                    IconsaxPlusLinear.camera,
-                    size: 25.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20.0),
-          SizedBox(
-            width: double.infinity,
-            child: Divider(
-              color: Colors.grey[200],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Profile Information',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: AssetImage('images/avatars/avatar.jpg'),
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: secondaryDark,
                     ),
-                    const SizedBox(height: 15.0),
-                    _buildRow('Name', 'Obada Daraghmeh'),
-                    _buildRow('Username', 'Obada7.e'),
-                    const SizedBox(height: 20.0),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Divider(
-                        color: Colors.grey[200],
-                      ),
+                    padding: const EdgeInsets.all(5.0),
+                    child: Icon(
+                      IconlyLight.camera,
+                      color: Colors.white,
+                      size: 20.0,
                     ),
-                    const SizedBox(height: 20.0),
-                    const Text(
-                      'Personal Information',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 15.0),
-                    _buildRow('E-mail', 'obada.e.amer@gmail.com'),
-                    _buildRow('Phone Number', '0597589712'),
-                    _buildRow('Gender', 'Male'),
-                    _buildRow('Date of Birth', '08 May, 2000'),
-                  ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRow(String title, String info) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 20.0,
+            SizedBox(height: 20.0),
+            Text(
+              'Obada Daraghmeh',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Text(
-            info,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 20.0,
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 40.0),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  width: 200.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    border: Border.all(color: primaryGreen),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    'Edit profile',
+                    style: TextStyle(
+                      color: primaryGreen,
+                      fontSize: 15.0,
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
-          const Icon(
-            IconsaxPlusLinear.arrow_right_3,
-            color: Colors.black,
-          ),
-        ],
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: items.length,
+              itemBuilder: (context, index) => SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(icons[index]),
+                      title: Text(items[index]),
+                      trailing: const Icon(IconlyLight.arrow_right_2),
+                      minTileHeight: 0,
+                    ),
+                    if (index != items.length - 1)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: const Divider(),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
+      bottomNavigationBar: StatefulBuilder(
+        builder: (context, setState) {
+          return CurvedNavigationBar(
+            key: widget.bottomNavigationKey,
+            buttonBackgroundColor: primaryGreen,
+            backgroundColor: Colors.transparent,
+            color: secondaryDark,
+            animationCurve: Curves.easeInOutCubicEmphasized,
+            index: bottomNavigationBarIndex,
+            items: <Widget>[
+              Icon(
+                IconlyLight.bag,
+                size: 30,
+                color:
+                    bottomNavigationBarIndex == 1 ? primaryDark : primaryGreen,
+              ),
+              Icon(
+                IconlyLight.heart,
+                size: 30,
+                color:
+                    bottomNavigationBarIndex == 0 ? primaryDark : primaryGreen,
+              ),
+              Icon(
+                IconlyLight.home,
+                size: 30,
+                color:
+                    bottomNavigationBarIndex == 2 ? primaryDark : primaryGreen,
+              ),
+              Icon(
+                IconlyLight.notification,
+                size: 30,
+                color:
+                    bottomNavigationBarIndex == 3 ? primaryDark : primaryGreen,
+              ),
+              Icon(
+                IconlyLight.profile,
+                size: 30,
+                color:
+                    bottomNavigationBarIndex == 4 ? primaryDark : primaryGreen,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                bottomNavigationBarIndex = index;
+              });
+            },
+          );
+        },
+      ),
+      backgroundColor: lightBgColor,
     );
   }
 }
