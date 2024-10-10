@@ -1,6 +1,5 @@
 import 'package:ecommerce/product_details.dart';
 import 'package:ecommerce/profile.dart';
-// import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -381,80 +380,35 @@ class _HomePageState extends State<HomePage> {
                 bottomRight: Radius.circular(50.0),
               ),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: lightBgColor,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50.0),
-                  bottomRight: Radius.circular(50.0),
+            backgroundColor: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  itemCount: drawerItemsLabel.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Icon(
+                        drawerItemsIcon[index],
+                        color: Colors.black,
+                      ),
+                      title: Text(drawerItemsLabel[index]),
+                      onTap: () {
+                        index == 0
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Profile(),
+                                ),
+                              )
+                            : null;
+                      },
+                    );
+                  },
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 40,
-                      right: 16,
-                      bottom: 16,
-                      left: 16,
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: secondaryGreen,
-                              width: 5,
-                            ),
-                          ),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundImage:
-                                AssetImage('images/avatars/avatar.jpg'),
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        SizedBox(
-                          width: 150,
-                          child: Text(
-                            'Obada Daraghmeh',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemCount: drawerItemsLabel.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Icon(
-                          drawerItemsIcon[index],
-                          color: Colors.black,
-                        ),
-                        title: Text(drawerItemsLabel[index]),
-                        onTap: () {
-                          index == 0
-                              ? Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Profile(),
-                                  ),
-                                )
-                              : null;
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
+              ],
             ),
           ),
         ],
