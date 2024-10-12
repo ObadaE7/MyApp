@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:iconly/iconly.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    int bottomNavigationBarIndex = 2;
+    int bottomNavigationBarIndex = 0;
 
     Color lightBgColor = Colors.white;
     Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     // Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);
     Color secondaryLight = const Color.fromRGBO(242, 241, 235, 1);
     Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-    Color secondaryDark = Color(0xFF17203A);
+    // Color secondaryDark = Color(0xFF17203A);
 
     // Categories
     List<String> categoriesName = [
@@ -94,137 +95,148 @@ class _HomePageState extends State<HomePage> {
       key: widget.scaffoldKey,
       backgroundColor: lightBgColor,
       appBar: AppBar(
-        leading: IconButton(
-          icon: HugeIcon(
-            icon: HugeIcons.strokeRoundedMenu02,
-            color: secondaryDark,
-          ),
-          tooltip: 'Open Drawer',
-          onPressed: () {
+        automaticallyImplyLeading: false,
+        title: InkWell(
+          onTap: () {
             widget.scaffoldKey.currentState!.openDrawer();
           },
-        ),
-        title: Column(
-          children: [
-            Text(
-              'Store location',
-              style: TextStyle(
-                color: secondaryGreen,
-                fontSize: 14.0,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  IconlyBroken.location,
-                  color: Colors.orangeAccent,
-                  size: 20,
-                ),
-                const SizedBox(width: 5.0),
-                Text(
-                  'Tubas, Palestine',
-                  style: TextStyle(
-                    color: secondaryDark,
-                    fontSize: 18.0,
+          child: Row(
+            children: [
+              Container(
+                height: 45.0,
+                width: 45.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  image: DecorationImage(
+                    image: AssetImage('images/avatars/avatar.jpg'),
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(
-              right: 20.0,
-            ),
-            child: Container(
-              height: 45.0,
-              width: 45.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                image: DecorationImage(
-                  image: AssetImage('images/avatars/avatar.jpg'),
+              ),
+              const SizedBox(width: 10.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Hello,",
+                    style: TextStyle(
+                      color: primaryDark.withOpacity(.5),
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  Text(
+                    'Obada Daraghmeh',
+                    style: TextStyle(
+                      color: primaryDark,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Badge(
+                offset: const Offset(-6.0, 6.0),
+                label: Text(
+                  '0',
+                  style: TextStyle(
+                    color: secondaryLight,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                backgroundColor: primaryDark,
+                child: IconButton(
+                  icon: Icon(
+                    IconlyLight.notification,
+                    color: primaryDark,
+                    size: 30.0,
+                  ),
+                  onPressed: () {},
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-        backgroundColor: lightBgColor,
+        ),
+        backgroundColor: primaryGreen,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              // Search bar
-              TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    IconlyLight.search,
-                    color: secondaryDark,
+        child: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 180.0,
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 10.0,
                   ),
-                  hintText: 'Looking for something?',
-                  hintStyle: TextStyle(
-                    color: secondaryDark.withOpacity(.4),
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.normal,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [primaryGreen, secondaryGreen],
+                    ),
                   ),
-                  filled: true,
-                  fillColor: secondaryLight.withOpacity(.5),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 16.0,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        IconlyLight.search,
+                        color: primaryDark.withOpacity(.5),
+                      ),
+                      hintText: 'Search here...',
+                      hintStyle: TextStyle(
+                        color: primaryDark.withOpacity(.5),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      filled: true,
+                      fillColor: secondaryGreen.withOpacity(.5),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(vertical: 16.0),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20.0),
-              // Sales slider
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    height: 170,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          primaryGreen,
-                          secondaryGreen,
-                        ],
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                width: 180,
-                                child: Text(
-                                  'Get your special sale up to 50%',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold,
+                //  Special sale
+                Positioned(
+                  bottom: -80.0,
+                  left: 20,
+                  right: 20,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        height: 170.0,
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                          color: secondaryLight,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 180,
+                                  child: Text(
+                                    'Get your special sale up to 50%',
+                                    style: TextStyle(
+                                      color: primaryDark,
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 15.0),
-                              InkWell(
-                                onTap: () {},
-                                child: Container(
+                                const SizedBox(height: 15.0),
+                                Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 15.0,
                                     vertical: 8.0,
@@ -242,134 +254,123 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: -50,
+                        right: -70,
+                        child: Image(
+                          image: AssetImage('images/illustrations/sale-50.png'),
+                          width: 300,
+                          height: 250,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 100.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: [
+                  // Categories
+                  SizedBox(
+                    height: 50.0,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categoriesName.length,
+                      itemBuilder: (context, index) => categoryCard(
+                        categoriesIcon[index],
+                        categoriesName[index],
+                        isActive: index == 0 ? true : false,
                       ),
                     ),
                   ),
-                  const Positioned(
-                    top: -50,
-                    right: -70,
-                    child: Image(
-                      image: AssetImage('images/illustrations/sale-50.png'),
-                      width: 300,
-                      height: 250,
-                      fit: BoxFit.contain,
+                  const SizedBox(height: 20.0),
+                  // Products by category
+                  GridView.builder(
+                    itemCount:
+                        productsName.length <= 6 ? productsName.length : 6,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20.0,
+                      mainAxisExtent: 280.0,
                     ),
+                    itemBuilder: (context, index) {
+                      return productByCategoryCard(
+                        productsImage[index],
+                        productsName[index],
+                        productsPrice[index],
+                        isFavorite: (index % 2 == 0) ? true : false,
+                      );
+                    },
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
                   ),
                 ],
               ),
-              const SizedBox(height: 20.0),
-              // Categories
-              SizedBox(
-                height: 50.0,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categoriesName.length,
-                  itemBuilder: (context, index) => _buildCategoryRow(
-                    categoriesIcon[index],
-                    categoriesName[index],
-                    isActive: index == 0 ? true : false,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              // Popular products
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    'Popular',
-                    style: TextStyle(
-                      color: primaryDark,
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'View All',
-                    style: TextStyle(
-                      color: primaryDark.withOpacity(.5),
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0),
-              GridView.builder(
-                itemCount: productsName.length <= 6 ? productsName.length : 6,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20.0,
-                  mainAxisExtent: 280.0,
-                ),
-                itemBuilder: (context, index) {
-                  return _buildPopularProductCard(
-                    productsImage[index],
-                    productsName[index],
-                    productsPrice[index],
-                    isFavorite: (index % 2 == 0) ? true : false,
-                  );
-                },
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: StatefulBuilder(
-        builder: (context, setState) {
-          return CurvedNavigationBar(
-            key: widget.bottomNavigationKey,
-            buttonBackgroundColor: primaryGreen,
-            backgroundColor: Colors.transparent,
-            color: secondaryDark,
-            animationCurve: Curves.easeInOutCubicEmphasized,
-            index: bottomNavigationBarIndex,
-            items: <Widget>[
-              Icon(
-                IconlyLight.bag,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 1 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.heart,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 0 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.home,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 2 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.notification,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 3 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.profile,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 4 ? primaryDark : primaryGreen,
-              ),
-            ],
-            onTap: (index) {
-              setState(() {
-                bottomNavigationBarIndex = index;
-              });
-            },
-          );
-        },
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: primaryGreen,
+              hoverColor: primaryGreen.withOpacity(.5),
+              gap: 8,
+              activeColor: Colors.black,
+              iconSize: 24,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: Duration(milliseconds: 400),
+              tabBackgroundColor: primaryGreen.withOpacity(.2),
+              color: primaryDark,
+              tabs: [
+                GButton(
+                  icon: IconlyLight.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: IconlyLight.bag,
+                  text: 'Cart',
+                ),
+                GButton(
+                  icon: IconlyLight.heart,
+                  text: 'Favorite',
+                ),
+                GButton(
+                  icon: IconlyLight.profile,
+                  text: 'Profile',
+                ),
+              ],
+              selectedIndex: bottomNavigationBarIndex,
+              onTabChange: (index) {
+                setState(() {
+                  bottomNavigationBarIndex = index;
+                });
+              },
+            ),
+          ),
+        ),
       ),
       drawer: Stack(
         children: [
@@ -384,6 +385,43 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                Container(
+                  height: 200.0,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50.0),
+                      bottomRight: Radius.circular(50.0),
+                    ),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        primaryGreen,
+                        secondaryGreen,
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage:
+                            AssetImage('images/avatars/avatar.jpg'),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        'Obada Daraghmeh',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ListView.builder(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
@@ -416,7 +454,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildCategoryRow(IconData icon, String name, {isActive = false}) {
+  Widget categoryCard(IconData icon, String name, {isActive = false}) {
     Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
     Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);
     Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
@@ -448,7 +486,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildPopularProductCard(String image, String name, String price,
+  Widget productByCategoryCard(String image, String name, String price,
       {isFavorite = false}) {
     Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
     Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);

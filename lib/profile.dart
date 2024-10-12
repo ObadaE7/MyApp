@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconly/iconly.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Profile extends StatefulWidget {
-  Profile({super.key});
-  final GlobalKey<CurvedNavigationBarState> bottomNavigationKey = GlobalKey();
+  const Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  int bottomNavigationBarIndex = 2;
+  int bottomNavigationBarIndex = 0;
 
   Color lightBgColor = Colors.white;
   Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
@@ -195,54 +194,56 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      bottomNavigationBar: StatefulBuilder(
-        builder: (context, setState) {
-          return CurvedNavigationBar(
-            key: widget.bottomNavigationKey,
-            buttonBackgroundColor: primaryGreen,
-            backgroundColor: Colors.transparent,
-            color: secondaryDark,
-            animationCurve: Curves.easeInOutCubicEmphasized,
-            index: bottomNavigationBarIndex,
-            items: <Widget>[
-              Icon(
-                IconlyLight.bag,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 1 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.heart,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 0 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.home,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 2 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.notification,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 3 ? primaryDark : primaryGreen,
-              ),
-              Icon(
-                IconlyLight.profile,
-                size: 30,
-                color:
-                    bottomNavigationBarIndex == 4 ? primaryDark : primaryGreen,
-              ),
-            ],
-            onTap: (index) {
-              setState(() {
-                bottomNavigationBarIndex = index;
-              });
-            },
-          );
-        },
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: primaryGreen,
+              hoverColor: primaryGreen.withOpacity(.5),
+              gap: 8,
+              activeColor: Colors.black,
+              iconSize: 24,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: Duration(milliseconds: 400),
+              tabBackgroundColor: primaryGreen.withOpacity(.2),
+              color: primaryDark,
+              tabs: [
+                GButton(
+                  icon: IconlyLight.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: IconlyLight.bag,
+                  text: 'Cart',
+                ),
+                GButton(
+                  icon: IconlyLight.heart,
+                  text: 'Favorite',
+                ),
+                GButton(
+                  icon: IconlyLight.profile,
+                  text: 'Profile',
+                ),
+              ],
+              selectedIndex: bottomNavigationBarIndex,
+              onTabChange: (index) {
+                setState(() {
+                  bottomNavigationBarIndex = index;
+                });
+              },
+            ),
+          ),
+        ),
       ),
       backgroundColor: lightBgColor,
     );
