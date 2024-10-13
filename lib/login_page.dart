@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/utils/app_colors.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
-  Color lightBgColor = Colors.white;
-  Color secondaryLight = const Color.fromRGBO(242, 241, 235, 1);
-  Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-  Color secondaryDark = Color(0xFF17203A);
-  Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-  Color secondaryGreen = const Color.fromRGBO(175, 200, 173, 1);
-
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +26,7 @@ class _LoginState extends State<Login> {
                   child: Text(
                     'Sign In',
                     style: TextStyle(
-                      color: secondaryDark,
+                      color: AppColors.secondaryDark,
                       fontSize: 40.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -42,7 +36,7 @@ class _LoginState extends State<Login> {
                 Text(
                   'Email',
                   style: TextStyle(
-                    color: secondaryDark,
+                    color: AppColors.secondaryDark,
                     fontSize: 20.0,
                   ),
                 ),
@@ -50,16 +44,16 @@ class _LoginState extends State<Login> {
                   decoration: InputDecoration(
                     prefixIcon: HugeIcon(
                       icon: HugeIcons.strokeRoundedMail02,
-                      color: secondaryDark,
+                      color: AppColors.secondaryDark,
                     ),
                     hintText: 'example@example.com',
                     hintStyle: TextStyle(
-                      color: secondaryDark.withOpacity(.4),
+                      color: AppColors.secondaryDark.withOpacity(.4),
                       fontSize: 20.0,
                       fontWeight: FontWeight.normal,
                     ),
                     filled: true,
-                    fillColor: secondaryLight.withOpacity(.5),
+                    fillColor: AppColors.secondaryLight.withOpacity(.5),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(16.0),
@@ -73,7 +67,7 @@ class _LoginState extends State<Login> {
                 Text(
                   'Password',
                   style: TextStyle(
-                    color: secondaryDark,
+                    color: AppColors.secondaryDark,
                     fontSize: 20.0,
                   ),
                 ),
@@ -81,20 +75,20 @@ class _LoginState extends State<Login> {
                   decoration: InputDecoration(
                     prefixIcon: HugeIcon(
                       icon: HugeIcons.strokeRoundedLockPassword,
-                      color: secondaryDark,
+                      color: AppColors.secondaryDark,
                     ),
                     suffixIcon: HugeIcon(
                       icon: HugeIcons.strokeRoundedViewOff,
-                      color: secondaryDark,
+                      color: AppColors.secondaryDark,
                     ),
                     hintText: '•••••••••',
                     hintStyle: TextStyle(
-                      color: secondaryDark.withOpacity(.4),
+                      color: AppColors.secondaryDark.withOpacity(.4),
                       fontSize: 20.0,
                       fontWeight: FontWeight.normal,
                     ),
                     filled: true,
-                    fillColor: secondaryLight.withOpacity(.5),
+                    fillColor: AppColors.secondaryLight.withOpacity(.5),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(16.0),
@@ -111,7 +105,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Checkbox(
-                          activeColor: primaryGreen,
+                          activeColor: AppColors.primaryGreen,
                           checkColor: Colors.white,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -119,7 +113,7 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                           side: BorderSide(
-                            color: primaryGreen,
+                            color: AppColors.primaryGreen,
                           ),
                           value: true,
                           onChanged: (value) {},
@@ -127,7 +121,7 @@ class _LoginState extends State<Login> {
                         Text(
                           'Remember me',
                           style: TextStyle(
-                            color: secondaryDark,
+                            color: AppColors.secondaryDark,
                             fontSize: 16.0,
                           ),
                         ),
@@ -137,7 +131,7 @@ class _LoginState extends State<Login> {
                       child: Text(
                         'Forgot Password?',
                         style: TextStyle(
-                          color: secondaryDark,
+                          color: AppColors.secondaryDark,
                           fontSize: 16.0,
                         ),
                       ),
@@ -150,7 +144,7 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   height: 60.0,
                   decoration: BoxDecoration(
-                    color: primaryGreen,
+                    color: AppColors.primaryGreen,
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: TextButton(
@@ -158,7 +152,7 @@ class _LoginState extends State<Login> {
                     child: Text(
                       'Sign In',
                       style: TextStyle(
-                        color: lightBgColor,
+                        color: Colors.white,
                         fontSize: 20.0,
                       ),
                     ),
@@ -177,7 +171,7 @@ class _LoginState extends State<Login> {
                     Text(
                       'Or sign up with',
                       style: TextStyle(
-                        color: secondaryDark,
+                        color: AppColors.secondaryDark,
                         fontSize: 20.0,
                       ),
                     ),
@@ -194,30 +188,30 @@ class _LoginState extends State<Login> {
                   children: [
                     CircleAvatar(
                       radius: 30.0,
-                      backgroundColor: primaryGreen.withOpacity(.2),
+                      backgroundColor: AppColors.primaryGreen.withOpacity(.2),
                       child: HugeIcon(
                         icon: HugeIcons.strokeRoundedGoogle,
-                        color: primaryDark,
+                        color: AppColors.primaryDark,
                         size: 35.0,
                       ),
                     ),
                     const SizedBox(width: 20.0),
                     CircleAvatar(
                       radius: 30.0,
-                      backgroundColor: primaryGreen.withOpacity(.2),
+                      backgroundColor: AppColors.primaryGreen.withOpacity(.2),
                       child: HugeIcon(
                         icon: HugeIcons.strokeRoundedFacebook02,
-                        color: primaryDark,
+                        color: AppColors.primaryDark,
                         size: 35.0,
                       ),
                     ),
                     const SizedBox(width: 20.0),
                     CircleAvatar(
                       radius: 30.0,
-                      backgroundColor: primaryGreen.withOpacity(.2),
+                      backgroundColor: AppColors.primaryGreen.withOpacity(.2),
                       child: HugeIcon(
                         icon: HugeIcons.strokeRoundedApple,
-                        color: primaryDark,
+                        color: AppColors.primaryDark,
                         size: 35.0,
                       ),
                     ),
@@ -230,7 +224,7 @@ class _LoginState extends State<Login> {
                       Text(
                         'Don\'t have an account?',
                         style: TextStyle(
-                          color: secondaryDark,
+                          color: AppColors.secondaryDark,
                           fontSize: 18.0,
                         ),
                       ),
@@ -239,7 +233,7 @@ class _LoginState extends State<Login> {
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
-                            color: primaryGreen,
+                            color: AppColors.primaryGreen,
                             fontSize: 18.0,
                           ),
                         ),
@@ -257,7 +251,7 @@ class _LoginState extends State<Login> {
                 height: 342,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: primaryGreen.withOpacity(.2),
+                  color: AppColors.primaryGreen.withOpacity(.2),
                 ),
               ),
             ),
@@ -269,7 +263,7 @@ class _LoginState extends State<Login> {
                 height: 406,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: primaryGreen.withOpacity(.2),
+                  color: AppColors.primaryGreen.withOpacity(.2),
                 ),
               ),
             ),

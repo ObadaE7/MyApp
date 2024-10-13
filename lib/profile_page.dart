@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/utils/app_colors.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconly/iconly.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfilePageState extends State<ProfilePage> {
   int bottomNavigationBarIndex = 0;
-
-  Color lightBgColor = Colors.white;
-  Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-  Color secondaryGreen = const Color.fromRGBO(175, 200, 173, 1);
-  Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-  Color secondaryDark = Color(0xFF17203A);
 
   List<String> titles = [
     'Account',
@@ -30,7 +25,7 @@ class _ProfileState extends State<Profile> {
   ];
 
   List<String> subtitles = [
-    'Update your name, email, and profile picture',
+    'Update your name, email, and profilePage picture',
     'Change your password and set up security options',
     'Manage your shipping and billing addresses',
     'Manage your balance and payment options',
@@ -73,10 +68,10 @@ class _ProfileState extends State<Profile> {
           },
         ),
         title: Text(
-          'Profile',
+          'ProfilePage',
         ),
         centerTitle: true,
-        backgroundColor: lightBgColor,
+        backgroundColor: AppColors.lightBackgroundColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -95,7 +90,10 @@ class _ProfileState extends State<Profile> {
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [primaryGreen, secondaryGreen],
+                        colors: [
+                          AppColors.primaryGreen,
+                          AppColors.secondaryGreen,
+                        ],
                       ),
                     ),
                   ),
@@ -149,7 +147,7 @@ class _ProfileState extends State<Profile> {
                     child: Text(
                       'Obada Daraghmeh',
                       style: TextStyle(
-                        color: primaryDark,
+                        color: AppColors.primaryDark,
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -171,8 +169,8 @@ class _ProfileState extends State<Profile> {
                         title: Text(titles[index]),
                         subtitle: Text(subtitles[index]),
                         trailing: const Icon(IconlyLight.arrow_right_2),
-                        iconColor: primaryGreen,
-                        tileColor: primaryGreen.withOpacity(0.1),
+                        iconColor: AppColors.primaryGreen,
+                        tileColor: AppColors.primaryGreen.withOpacity(0.1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
                         ),
@@ -208,15 +206,15 @@ class _ProfileState extends State<Profile> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
-              rippleColor: primaryGreen,
-              hoverColor: primaryGreen.withOpacity(.5),
+              rippleColor: AppColors.primaryGreen,
+              hoverColor: AppColors.primaryGreen.withOpacity(.5),
               gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: primaryGreen.withOpacity(.2),
-              color: primaryDark,
+              tabBackgroundColor: AppColors.primaryGreen.withOpacity(.2),
+              color: AppColors.primaryDark,
               tabs: [
                 GButton(
                   icon: IconlyLight.home,
@@ -245,7 +243,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      backgroundColor: lightBgColor,
+      backgroundColor: AppColors.lightBackgroundColor,
     );
   }
 

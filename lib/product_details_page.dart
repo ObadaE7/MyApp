@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/utils/app_colors.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconly/iconly.dart';
 import 'package:dotted_line/dotted_line.dart';
 
-class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+class ProductDetailsPage extends StatefulWidget {
+  const ProductDetailsPage({super.key});
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
+  State<ProductDetailsPage> createState() => _ProductDetailsPageState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
-  Color lightBgColor = Colors.white;
-  Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-  Color secondaryGreen = const Color.fromRGBO(175, 200, 173, 1);
-  // Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-  Color secondaryDark = Color(0xFF17203A);
-
+class _ProductDetailsPageState extends State<ProductDetailsPage> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
@@ -41,12 +36,12 @@ class _ProductDetailsState extends State<ProductDetails> {
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: primaryGreen.withOpacity(.2),
+                color: AppColors.primaryGreen.withOpacity(.2),
               ),
               child: IconButton(
                 icon: Icon(
                   IconlyBold.heart,
-                  color: isFavorite ? primaryGreen : Colors.white70,
+                  color: isFavorite ? AppColors.primaryGreen : Colors.white70,
                 ),
                 onPressed: () {
                   setState(() {
@@ -57,7 +52,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
           ),
         ],
-        backgroundColor: lightBgColor,
+        backgroundColor: AppColors.lightBackgroundColor,
       ),
       body: Stack(
         alignment: Alignment.topCenter,
@@ -120,7 +115,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
-                              color: primaryGreen,
+                              color: AppColors.primaryGreen,
                             ),
                           ),
                           Text(
@@ -184,7 +179,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     style: TextStyle(
                                       fontSize: 25.0,
                                       fontWeight: FontWeight.bold,
-                                      color: secondaryDark,
+                                      color: AppColors.secondaryDark,
                                     ),
                                   ),
                                 ],
@@ -196,7 +191,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     iconSize: 40.0,
                                     icon: Icon(
                                       HugeIcons.strokeRoundedRemoveSquare,
-                                      color: primaryGreen,
+                                      color: AppColors.primaryGreen,
                                     ),
                                     onPressed: () {},
                                   ),
@@ -206,7 +201,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     style: TextStyle(
                                       fontSize: 25.0,
                                       fontWeight: FontWeight.bold,
-                                      color: secondaryDark,
+                                      color: AppColors.secondaryDark,
                                     ),
                                   ),
                                   SizedBox(width: 10.0),
@@ -215,7 +210,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     iconSize: 40.0,
                                     icon: Icon(
                                       HugeIcons.strokeRoundedPlusSignSquare,
-                                      color: primaryGreen,
+                                      color: AppColors.primaryGreen,
                                     ),
                                     onPressed: () {},
                                   ),
@@ -230,7 +225,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               direction: Axis.horizontal,
                               lineLength: double.infinity,
                               dashLength: 4.0,
-                              dashColor: primaryGreen,
+                              dashColor: AppColors.primaryGreen,
                             ),
                           ),
                           ListTile(
@@ -253,7 +248,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               direction: Axis.horizontal,
                               lineLength: double.infinity,
                               dashLength: 4.0,
-                              dashColor: primaryGreen,
+                              dashColor: AppColors.primaryGreen,
                             ),
                           ),
                         ],
@@ -300,7 +295,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
-                    color: secondaryDark,
+                    color: AppColors.secondaryDark,
                   ),
                 ),
               ],
@@ -311,7 +306,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 vertical: 10.0,
               ),
               decoration: BoxDecoration(
-                color: primaryGreen,
+                color: AppColors.primaryGreen,
                 borderRadius: BorderRadius.circular(16.0),
               ),
               child: Row(
@@ -336,7 +331,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ],
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.lightBackgroundColor,
     );
   }
 }

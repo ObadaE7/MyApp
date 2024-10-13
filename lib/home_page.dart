@@ -1,15 +1,14 @@
-import 'package:ecommerce/product_details.dart';
-import 'package:ecommerce/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce/utils/app_colors.dart';
+import 'package:ecommerce/product_details_page.dart';
+import 'package:ecommerce/profile_page.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:iconly/iconly.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<CurvedNavigationBarState> bottomNavigationKey = GlobalKey();
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -18,14 +17,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     int bottomNavigationBarIndex = 0;
-
-    Color lightBgColor = Colors.white;
-    Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-    Color secondaryGreen = const Color.fromRGBO(175, 200, 173, 1);
-    // Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);
-    Color secondaryLight = const Color.fromRGBO(242, 241, 235, 1);
-    Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-    // Color secondaryDark = Color(0xFF17203A);
 
     // Categories
     List<String> categoriesName = [
@@ -80,7 +71,7 @@ class _HomePageState extends State<HomePage> {
     List<IconData> drawerItemsIcon = [
       HugeIcons.strokeRoundedUser,
       HugeIcons.strokeRoundedTruckDelivery,
-      HugeIcons.strokeRoundedSettings05,
+      IconlyLight.filter,
       IconlyLight.logout,
     ];
 
@@ -93,16 +84,15 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: widget.scaffoldKey,
-      backgroundColor: lightBgColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: InkWell(
-          onTap: () {
-            widget.scaffoldKey.currentState!.openDrawer();
-          },
-          child: Row(
-            children: [
-              Container(
+        title: Row(
+          children: [
+            InkWell(
+              onTap: () {
+                widget.scaffoldKey.currentState!.openDrawer();
+              },
+              child: Container(
                 height: 45.0,
                 width: 45.0,
                 decoration: BoxDecoration(
@@ -112,52 +102,52 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const SizedBox(width: 10.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello,",
-                    style: TextStyle(
-                      color: primaryDark.withOpacity(.5),
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  Text(
-                    'Obada Daraghmeh',
-                    style: TextStyle(
-                      color: primaryDark,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Badge(
-                offset: const Offset(-6.0, 6.0),
-                label: Text(
-                  '0',
+            ),
+            const SizedBox(width: 10.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Hello,",
                   style: TextStyle(
-                    color: secondaryLight,
-                    fontSize: 14.0,
+                    color: AppColors.primaryDark.withOpacity(.5),
+                    fontSize: 16.0,
+                  ),
+                ),
+                Text(
+                  'Obada Daraghmeh',
+                  style: TextStyle(
+                    color: AppColors.primaryDark,
+                    fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                backgroundColor: primaryDark,
-                child: IconButton(
-                  icon: Icon(
-                    IconlyLight.notification,
-                    color: primaryDark,
-                    size: 30.0,
-                  ),
-                  onPressed: () {},
+              ],
+            ),
+            const Spacer(),
+            Badge(
+              offset: const Offset(-6.0, 6.0),
+              label: Text(
+                '0',
+                style: TextStyle(
+                  color: AppColors.secondaryLight,
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
-          ),
+              backgroundColor: AppColors.primaryDark,
+              child: IconButton(
+                icon: Icon(
+                  IconlyLight.notification,
+                  color: AppColors.primaryDark,
+                  size: 30.0,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
         ),
-        backgroundColor: primaryGreen,
+        backgroundColor: AppColors.primaryGreen,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -176,23 +166,26 @@ class _HomePageState extends State<HomePage> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [primaryGreen, secondaryGreen],
+                      colors: [
+                        AppColors.primaryGreen,
+                        AppColors.secondaryGreen
+                      ],
                     ),
                   ),
                   child: TextField(
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         IconlyLight.search,
-                        color: primaryDark.withOpacity(.5),
+                        color: AppColors.primaryDark.withOpacity(.5),
                       ),
                       hintText: 'Search here...',
                       hintStyle: TextStyle(
-                        color: primaryDark.withOpacity(.5),
+                        color: AppColors.primaryDark.withOpacity(.5),
                         fontSize: 20.0,
                         fontWeight: FontWeight.normal,
                       ),
                       filled: true,
-                      fillColor: secondaryGreen.withOpacity(.5),
+                      fillColor: AppColors.secondaryGreen.withOpacity(.5),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(16.0),
@@ -215,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
-                          color: secondaryLight,
+                          color: AppColors.secondaryLight,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Text(
                                     'Get your special sale up to 50%',
                                     style: TextStyle(
-                                      color: primaryDark,
+                                      color: AppColors.primaryDark,
                                       fontSize: 22.0,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -243,7 +236,8 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    color: primaryDark.withOpacity(.5),
+                                    color:
+                                        AppColors.primaryDark.withOpacity(.5),
                                   ),
                                   child: const Text(
                                     'Shop Now',
@@ -335,15 +329,15 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
-              rippleColor: primaryGreen,
-              hoverColor: primaryGreen.withOpacity(.5),
+              rippleColor: AppColors.primaryGreen,
+              hoverColor: AppColors.primaryGreen.withOpacity(.5),
               gap: 8,
               activeColor: Colors.black,
               iconSize: 24,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration: Duration(milliseconds: 400),
-              tabBackgroundColor: primaryGreen.withOpacity(.2),
-              color: primaryDark,
+              tabBackgroundColor: AppColors.primaryGreen.withOpacity(.2),
+              color: AppColors.primaryDark,
               tabs: [
                 GButton(
                   icon: IconlyLight.home,
@@ -397,8 +391,8 @@ class _HomePageState extends State<HomePage> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        primaryGreen,
-                        secondaryGreen,
+                        AppColors.primaryGreen,
+                        AppColors.secondaryGreen,
                       ],
                     ),
                   ),
@@ -438,7 +432,7 @@ class _HomePageState extends State<HomePage> {
                             ? Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Profile(),
+                                  builder: (context) => ProfilePage(),
                                 ),
                               )
                             : null;
@@ -451,34 +445,31 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      backgroundColor: AppColors.lightBackgroundColor,
     );
   }
 
   Widget categoryCard(IconData icon, String name, {isActive = false}) {
-    Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-    Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);
-    Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-
     return Container(
       padding: const EdgeInsets.all(10.0),
       margin: const EdgeInsets.only(right: 15.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: primaryLight),
+        border: Border.all(color: AppColors.primaryLight),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Row(
         children: [
           HugeIcon(
             icon: icon,
-            color: isActive ? primaryGreen : primaryDark,
+            color: isActive ? AppColors.primaryGreen : AppColors.primaryDark,
           ),
           const SizedBox(width: 10.0),
           Text(
             name,
             style: TextStyle(
               fontSize: 20.0,
-              color: isActive ? primaryGreen : primaryDark,
+              color: isActive ? AppColors.primaryGreen : AppColors.primaryDark,
             ),
           )
         ],
@@ -488,10 +479,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget productByCategoryCard(String image, String name, String price,
       {isFavorite = false}) {
-    Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-    Color primaryLight = const Color.fromRGBO(238, 231, 218, 1);
-    Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-
     return Stack(
       children: [
         Column(
@@ -502,7 +489,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ProductDetails(),
+                    builder: (context) => const ProductDetailsPage(),
                   ),
                 );
               },
@@ -516,8 +503,8 @@ class _HomePageState extends State<HomePage> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      primaryLight,
-                      primaryGreen,
+                      AppColors.primaryLight,
+                      AppColors.primaryGreen,
                     ],
                   ),
                 ),
@@ -536,14 +523,14 @@ class _HomePageState extends State<HomePage> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: primaryGreen,
+                    color: AppColors.primaryGreen,
                     fontSize: 20.0,
                   ),
                 ),
                 Text(
                   price,
                   style: TextStyle(
-                    color: primaryDark,
+                    color: AppColors.primaryDark,
                     fontSize: 22.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -559,11 +546,12 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(10.0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: primaryGreen.withOpacity(.2),
+              color: AppColors.primaryGreen.withOpacity(.2),
             ),
             child: Icon(
               IconlyBold.heart,
-              color: isFavorite ? primaryGreen : primaryLight,
+              color:
+                  isFavorite ? AppColors.primaryGreen : AppColors.primaryLight,
             ),
           ),
         ),

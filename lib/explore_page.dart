@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/utils/app_colors.dart';
 
-class Explore extends StatefulWidget {
-  const Explore({super.key});
+class ExplorePage extends StatefulWidget {
+  const ExplorePage({super.key});
 
   @override
-  State<Explore> createState() => _ExploreState();
+  State<ExplorePage> createState() => _ExplorePageState();
 }
 
-class _ExploreState extends State<Explore> {
-  Color lightBgColor = Colors.white;
-  Color secondaryLight = const Color.fromRGBO(242, 241, 235, 1);
-  Color primaryDark = const Color.fromRGBO(34, 65, 45, 1);
-  Color secondaryDark = Color(0xFF17203A);
-  Color primaryGreen = const Color.fromRGBO(136, 171, 142, 1);
-  Color secondaryGreen = const Color.fromRGBO(175, 200, 173, 1);
-
+class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +19,6 @@ class _ExploreState extends State<Explore> {
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image(
                   image:
@@ -36,14 +29,14 @@ class _ExploreState extends State<Explore> {
                 ),
                 const SizedBox(height: 30.0),
                 Text(
-                  'Explore The App',
+                  'ExplorePage The App',
                   style: TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Start your shopping journey with us! Explore our wide range of products and enjoy a seamless shopping experience, backed by our commitment to quality.',
+                  'Start your shopping journey with us! ExplorePage our wide range of products and enjoy a seamless shopping experience, backed by our commitment to quality.',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
@@ -55,7 +48,7 @@ class _ExploreState extends State<Explore> {
                   width: double.infinity,
                   height: 60.0,
                   decoration: BoxDecoration(
-                    color: primaryGreen,
+                    color: AppColors.primaryGreen,
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: TextButton(
@@ -63,7 +56,7 @@ class _ExploreState extends State<Explore> {
                     child: Text(
                       'Let\'s Start',
                       style: TextStyle(
-                        color: lightBgColor,
+                        color: Colors.white,
                         fontSize: 20.0,
                       ),
                     ),
@@ -79,7 +72,7 @@ class _ExploreState extends State<Explore> {
                 height: 342,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: primaryGreen.withOpacity(.2),
+                  color: AppColors.primaryGreen.withOpacity(.2),
                 ),
               ),
             ),
@@ -91,7 +84,7 @@ class _ExploreState extends State<Explore> {
                 height: 406,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: primaryGreen.withOpacity(.2),
+                  color: AppColors.primaryGreen.withOpacity(.2),
                 ),
               ),
             ),
