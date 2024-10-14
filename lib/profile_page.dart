@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
           },
         ),
         title: Text(
-          'ProfilePage',
+          'Profile',
         ),
         centerTitle: true,
         backgroundColor: AppColors.lightBackgroundColor,

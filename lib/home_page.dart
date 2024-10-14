@@ -1,7 +1,7 @@
+import 'package:ecommerce/utils/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/utils/app_colors.dart';
 import 'package:ecommerce/product_details_page.dart';
-import 'package:ecommerce/profile_page.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:iconly/iconly.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -18,9 +18,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     int bottomNavigationBarIndex = 0;
 
-    // Categories
     List<String> categoriesName = [
-      'All',
+      'All Items',
       'Hoodies',
       'T-Shirts',
       'Shirts',
@@ -39,7 +38,6 @@ class _HomePageState extends State<HomePage> {
       HugeIcons.strokeRoundedWatch01,
     ];
 
-    // Popular products
     List<String> productsName = [
       'Black hoodie',
       'Hawaiian shirt isolated',
@@ -67,16 +65,13 @@ class _HomePageState extends State<HomePage> {
       '\$29.35',
     ];
 
-    // Drawer items
     List<IconData> drawerItemsIcon = [
-      HugeIcons.strokeRoundedUser,
       HugeIcons.strokeRoundedTruckDelivery,
       IconlyLight.filter,
       IconlyLight.logout,
     ];
 
     List<String> drawerItemsLabel = [
-      'Profile',
       'Orders',
       'Settings',
       'Logout',
@@ -85,47 +80,27 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: widget.scaffoldKey,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () {
-                widget.scaffoldKey.currentState!.openDrawer();
-              },
-              child: Container(
-                height: 45.0,
-                width: 45.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  image: DecorationImage(
-                    image: AssetImage('images/avatars/avatar.jpg'),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 10.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Hello,",
-                  style: TextStyle(
-                    color: AppColors.primaryDark.withOpacity(.5),
-                    fontSize: 16.0,
-                  ),
-                ),
-                Text(
-                  'Obada Daraghmeh',
-                  style: TextStyle(
-                    color: AppColors.primaryDark,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            Badge(
+        leading: IconButton(
+          icon: Icon(
+            HugeIcons.strokeRoundedMenu02,
+            color: AppColors.primaryDark,
+            size: 30.0,
+          ),
+          onPressed: () {
+            widget.scaffoldKey.currentState?.openDrawer();
+          },
+        ),
+        title: Text(
+          "Hello, Obada",
+          style: TextStyle(
+            color: AppColors.primaryDark,
+            fontSize: AppSizes.kTextSubheading,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: AppSizes.kPaddingNormal),
+            child: Badge(
               offset: const Offset(-6.0, 6.0),
               label: Text(
                 '0',
@@ -145,8 +120,8 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {},
               ),
             ),
-          ],
-        ),
+          ),
+        ],
         backgroundColor: AppColors.primaryGreen,
       ),
       body: SingleChildScrollView(
@@ -158,9 +133,9 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: 180.0,
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.kPaddingNormal,
+                    vertical: AppSizes.kPaddingSmall,
                   ),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -173,41 +148,48 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   child: TextField(
+                    cursorColor: AppColors.primaryDark,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         IconlyLight.search,
-                        color: AppColors.primaryDark.withOpacity(.5),
+                        color: AppColors.primaryDark.withOpacity(0.5),
                       ),
-                      hintText: 'Search here...',
+                      suffixIcon: Icon(
+                        IconlyLight.filter,
+                        color: AppColors.primaryDark,
+                      ),
+                      hintText: 'What are you looking for today?',
                       hintStyle: TextStyle(
-                        color: AppColors.primaryDark.withOpacity(.5),
-                        fontSize: 20.0,
+                        fontSize: AppSizes.kTextBody,
                         fontWeight: FontWeight.normal,
+                        color: AppColors.primaryDark.withOpacity(0.5),
                       ),
                       filled: true,
-                      fillColor: AppColors.secondaryGreen.withOpacity(.5),
+                      fillColor: AppColors.secondaryGreen.withOpacity(0.5),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(16.0),
+                        borderRadius:
+                            BorderRadius.circular(AppSizes.kBorderRadiusLarge),
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 16.0),
                     ),
                   ),
                 ),
-                //  Special sale
                 Positioned(
                   bottom: -80.0,
-                  left: 20,
-                  right: 20,
+                  left: AppSizes.kPaddingNormal,
+                  right: AppSizes.kPaddingNormal,
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
                       Container(
                         height: 170.0,
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.kPaddingNormal,
+                        ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
+                          borderRadius: BorderRadius.circular(
+                            AppSizes.kBorderRadiusLarge,
+                          ),
                           color: AppColors.secondaryLight,
                         ),
                         child: Row(
@@ -223,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                     'Get your special sale up to 50%',
                                     style: TextStyle(
                                       color: AppColors.primaryDark,
-                                      fontSize: 22.0,
+                                      fontSize: AppSizes.kTextSubheading + 4.0,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -231,19 +213,28 @@ class _HomePageState extends State<HomePage> {
                                 const SizedBox(height: 15.0),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0,
-                                    vertical: 8.0,
+                                    horizontal: AppSizes.kPaddingNormal,
+                                    vertical: AppSizes.kPaddingNormal / 2.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    color:
-                                        AppColors.primaryDark.withOpacity(.5),
+                                    borderRadius: BorderRadius.circular(
+                                      AppSizes.kBorderRadiusLarge,
+                                    ),
+                                    color: AppColors.primaryGreen,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.primaryGreen
+                                            .withOpacity(0.5),
+                                        blurRadius: 10.0,
+                                        offset: const Offset(0, 10.0),
+                                      ),
+                                    ],
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Shop Now',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18.0,
+                                      fontSize: AppSizes.kTextSubheading,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -268,37 +259,62 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 100.0),
+            const SizedBox(height: 100.0),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.kPaddingNormal,
+              ),
               child: Column(
                 children: [
-                  // Categories
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Discover Our Top Picks',
+                        style: TextStyle(
+                          color: AppColors.primaryDark,
+                          fontSize: AppSizes.kTextHeading,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'See all',
+                        style: TextStyle(
+                          color: AppColors.primaryGreen,
+                          fontSize: AppSizes.kTextSubheading,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.kPaddingNormal),
                   SizedBox(
                     height: 50.0,
-                    child: ListView.builder(
+                    child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: categoriesName.length,
-                      itemBuilder: (context, index) => categoryCard(
+                      itemBuilder: (context, index) => _buildCategoryCard(
                         categoriesIcon[index],
                         categoriesName[index],
                         isActive: index == 0 ? true : false,
                       ),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(width: AppSizes.kPaddingNormal);
+                      },
                     ),
                   ),
-                  const SizedBox(height: 20.0),
-                  // Products by category
+                  const SizedBox(height: AppSizes.kPaddingNormal),
                   GridView.builder(
                     itemCount:
-                        productsName.length <= 6 ? productsName.length : 6,
+                        productsName.length <= 4 ? productsName.length : 4,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 20.0,
-                      mainAxisExtent: 280.0,
+                      crossAxisSpacing: AppSizes.kPaddingNormal,
+                      mainAxisSpacing: AppSizes.kPaddingNormal,
+                      mainAxisExtent: 300.0,
                     ),
                     itemBuilder: (context, index) {
-                      return productByCategoryCard(
+                      return _buildProductByCategoryCard(
                         productsImage[index],
                         productsName[index],
                         productsPrice[index],
@@ -309,6 +325,7 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
                   ),
+                  const SizedBox(height: AppSizes.kPaddingNormal),
                 ],
               ),
             ),
@@ -320,143 +337,137 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
+              blurRadius: 20.0,
+              color: Colors.black.withOpacity(0.1),
             ),
           ],
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-            child: GNav(
-              rippleColor: AppColors.primaryGreen,
-              hoverColor: AppColors.primaryGreen.withOpacity(.5),
-              gap: 8,
-              activeColor: Colors.black,
-              iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
-              tabBackgroundColor: AppColors.primaryGreen.withOpacity(.2),
-              color: AppColors.primaryDark,
-              tabs: [
-                GButton(
-                  icon: IconlyLight.home,
-                  text: 'Home',
-                ),
-                GButton(
-                  icon: IconlyLight.bag,
-                  text: 'Cart',
-                ),
-                GButton(
-                  icon: IconlyLight.heart,
-                  text: 'Favorite',
-                ),
-                GButton(
-                  icon: IconlyLight.profile,
-                  text: 'Profile',
-                ),
-              ],
-              selectedIndex: bottomNavigationBarIndex,
-              onTabChange: (index) {
-                setState(() {
-                  bottomNavigationBarIndex = index;
-                });
-              },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.kPaddingNormal,
+            vertical: AppSizes.kPaddingNormal / 2.0,
+          ),
+          child: GNav(
+            rippleColor: AppColors.primaryGreen,
+            hoverColor: AppColors.primaryGreen.withOpacity(0.5),
+            gap: 8.0,
+            activeColor: AppColors.primaryDark,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSizes.kPaddingNormal,
+              vertical: AppSizes.kPaddingNormal - 4.0,
             ),
+            duration: Duration(milliseconds: 400),
+            tabBackgroundColor: AppColors.primaryGreen.withOpacity(0.2),
+            color: AppColors.primaryDark,
+            tabs: [
+              GButton(
+                icon: IconlyLight.home,
+                text: 'Home',
+              ),
+              GButton(
+                icon: IconlyLight.bag,
+                text: 'Cart',
+              ),
+              GButton(
+                icon: IconlyLight.heart,
+                text: 'Favorite',
+              ),
+              GButton(
+                icon: IconlyLight.profile,
+                text: 'Profile',
+              ),
+            ],
+            selectedIndex: bottomNavigationBarIndex,
+            onTabChange: (index) {
+              setState(() {
+                bottomNavigationBarIndex = index;
+              });
+            },
           ),
         ),
       ),
-      drawer: Stack(
-        children: [
-          Drawer(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(50.0),
-                bottomRight: Radius.circular(50.0),
+      drawer: Drawer(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(50.0),
+            bottomRight: Radius.circular(50.0),
+          ),
+        ),
+        backgroundColor: AppColors.secondaryGreen,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            SafeArea(
+              child: Container(
+                margin: const EdgeInsets.only(top: 120.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSizes.kPaddingNormal,
+                  vertical: AppSizes.kPaddingExtraLarge * 2.0,
+                ),
+                height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(50.0),
+                    topLeft: Radius.circular(50.0),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Obada Daraghmeh',
+                      style: TextStyle(
+                        color: AppColors.primaryDark,
+                        fontSize: AppSizes.kTextHeading,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: AppSizes.kPaddingNormal),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: drawerItemsIcon.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(
+                            drawerItemsIcon[index],
+                            color: AppColors.primaryDark,
+                          ),
+                          title: Text(drawerItemsLabel[index]),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-            backgroundColor: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  height: 200.0,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50.0),
-                      bottomRight: Radius.circular(50.0),
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        AppColors.primaryGreen,
-                        AppColors.secondaryGreen,
-                      ],
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage:
-                            AssetImage('images/avatars/avatar.jpg'),
-                      ),
-                      const SizedBox(height: 10.0),
-                      Text(
-                        'Obada Daraghmeh',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: drawerItemsLabel.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Icon(
-                        drawerItemsIcon[index],
-                        color: Colors.black,
-                      ),
-                      title: Text(drawerItemsLabel[index]),
-                      onTap: () {
-                        index == 0
-                            ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfilePage(),
-                                ),
-                              )
-                            : null;
-                      },
-                    );
-                  },
-                ),
-              ],
+            Positioned(
+              top: 90.0,
+              child: CircleAvatar(
+                radius: 60.0,
+                backgroundColor: AppColors.primaryGreen.withOpacity(.3),
+              ),
             ),
-          ),
-        ],
+            Positioned(
+              top: 100.0,
+              child: CircleAvatar(
+                radius: 50.0,
+                backgroundImage: AssetImage('images/avatars/avatar.jpg'),
+              ),
+            ),
+          ],
+        ),
       ),
       backgroundColor: AppColors.lightBackgroundColor,
     );
   }
 
-  Widget categoryCard(IconData icon, String name, {isActive = false}) {
+  Widget _buildCategoryCard(IconData icon, String name, {isActive = false}) {
     return Container(
-      padding: const EdgeInsets.all(10.0),
-      margin: const EdgeInsets.only(right: 15.0),
+      padding: const EdgeInsets.all(AppSizes.kPaddingSmall + 2.0),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: AppColors.primaryLight),
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(AppSizes.kPaddingNormal),
       ),
       child: Row(
         children: [
@@ -468,16 +479,16 @@ class _HomePageState extends State<HomePage> {
           Text(
             name,
             style: TextStyle(
-              fontSize: 20.0,
+              fontSize: AppSizes.kTextSubheading + 2.0,
               color: isActive ? AppColors.primaryGreen : AppColors.primaryDark,
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Widget productByCategoryCard(String image, String name, String price,
+  Widget _buildProductByCategoryCard(String image, String name, String price,
       {isFavorite = false}) {
     return Stack(
       children: [
@@ -494,48 +505,51 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               child: Container(
-                height: 200.0,
+                height: 300.0,
                 width: double.infinity,
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(AppSizes.kPaddingNormal),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(AppSizes.kPaddingNormal),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
+                      AppColors.secondaryLight,
                       AppColors.primaryLight,
-                      AppColors.primaryGreen,
                     ],
                   ),
                 ),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.contain,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      image,
+                      height: 150.0,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                    ),
+                    const SizedBox(height: AppSizes.kPaddingSmall),
+                    Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: AppColors.primaryGreen,
+                        fontSize: AppSizes.kTextHeading - 2,
+                      ),
+                    ),
+                    Text(
+                      price,
+                      style: TextStyle(
+                        color: AppColors.primaryDark,
+                        fontSize: AppSizes.kTextHeading - 2,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(height: 10.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: AppColors.primaryGreen,
-                    fontSize: 20.0,
-                  ),
-                ),
-                Text(
-                  price,
-                  style: TextStyle(
-                    color: AppColors.primaryDark,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
             ),
           ],
         ),
@@ -550,9 +564,31 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Icon(
               IconlyBold.heart,
-              color:
-                  isFavorite ? AppColors.primaryGreen : AppColors.primaryLight,
+              color: isFavorite
+                  ? AppColors.primaryGreen
+                  : AppColors.secondaryLight,
             ),
+          ),
+        ),
+        Positioned(
+          top: 20.0,
+          left: 10.0,
+          child: Row(
+            children: [
+              Icon(
+                HugeIcons.strokeRoundedStar,
+                color: Colors.amber,
+                size: 20.0,
+              ),
+              const SizedBox(width: 5.0),
+              Text(
+                '4.5',
+                style: TextStyle(
+                  fontSize: AppSizes.kTextSubheading - 2,
+                  color: AppColors.primaryDark,
+                ),
+              ),
+            ],
           ),
         ),
       ],
