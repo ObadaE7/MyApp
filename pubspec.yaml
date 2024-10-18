@@ -38,8 +38,9 @@ dependencies:
   hugeicons: ^0.0.7
   iconly: ^1.0.1
   google_fonts: ^6.2.1
-  google_nav_bar: ^5.0.6
   dotted_line: ^3.2.2
+  motion_tab_bar: ^2.0.4
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -87,9 +88,9 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: SFPRO
-      fonts:
-        - asset: fonts/SF-Regular.OTF
+  # fonts:
+    # - family: 
+    #   fonts:
+    #     - asset: 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
