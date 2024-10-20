@@ -82,6 +82,7 @@ class _CartPageState extends State<CartPage> {
       body: Stack(
         children: [
           SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 130.0),
             child: Column(
               children: [
                 Padding(
@@ -159,15 +160,16 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppSizes.kPaddingNormal,
+                          if (index != productsName.length - 1)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: AppSizes.kPaddingNormal,
+                              ),
+                              child: DottedLine(
+                                dashColor: AppColors.primaryGreen,
+                                dashGapLength: 5.0,
+                              ),
                             ),
-                            child: DottedLine(
-                              dashColor: AppColors.primaryGreen,
-                              dashGapLength: 5.0,
-                            ),
-                          ),
                         ],
                       );
                     },

@@ -1,9 +1,9 @@
+import 'package:ecommerce/utils/dummy_data.dart';
 import 'package:ecommerce/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/widgets/product_card.dart';
 import 'package:ecommerce/widgets/promotion_banner.dart';
 import 'package:ecommerce/widgets/section_title.dart';
-import 'package:ecommerce/widgets/simple_rating.dart';
 import 'package:ecommerce/utils/app_sizes.dart';
 import 'package:ecommerce/utils/app_colors.dart';
 import 'package:iconly/iconly.dart';
@@ -22,33 +22,6 @@ class _HomePageState extends State<HomePage> {
   final CarouselSliderController _carouselController =
       CarouselSliderController();
   late List<bool> isFavoriteList;
-
-  List<String> productsName = [
-    'Men\'s Black hoodie',
-    'Hawaiian shirt isolated',
-    'Plain dark green t-shirt',
-    'Light green front sunglasses with black',
-    'Rolex Yacht-Master',
-    'Cargo pants men with plain isolated',
-  ];
-
-  List<String> productsImage = [
-    'images/products/hoodies/hoodie-1.png',
-    'images/products/shirts/shirt-4.png',
-    'images/products/t-shirts/t-shirt-5.png',
-    'images/products/glasses/glasses-3.png',
-    'images/products/watches/watch-2.png',
-    'images/products/pants/pants-4.png',
-  ];
-
-  List<String> productsPrice = [
-    '\$20.00',
-    '\$11.00',
-    '\$40.00',
-    '\$36.99',
-    '\$60.00',
-    '\$29.35',
-  ];
 
   List<IconData> drawerItemsIcon = [
     HugeIcons.strokeRoundedTruckDelivery,
@@ -94,7 +67,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    isFavoriteList = List<bool>.filled(productsName.length, false);
+    isFavoriteList = List<bool>.filled(DummyData.productsName.length, false);
   }
 
   @override
@@ -264,8 +237,9 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount:
-                        productsName.length <= 4 ? productsName.length : 4,
+                    itemCount: DummyData.productsName.length <= 4
+                        ? DummyData.productsName.length
+                        : 4,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -274,45 +248,22 @@ class _HomePageState extends State<HomePage> {
                       mainAxisExtent: 280.0,
                     ),
                     itemBuilder: (context, index) {
-                      return Stack(
-                        children: [
-                          ProductCardGrid(
-                            imagePath: productsImage[index],
-                            name: productsName[index],
-                            price: productsPrice[index],
-                            height: 280.0,
-                          ),
-                          Positioned(
-                            top: 10.0,
-                            right: 10.0,
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isFavoriteList[index] =
-                                      !isFavoriteList[index];
-                                });
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.primaryGreen.withOpacity(.2),
-                                ),
-                                child: Icon(
-                                  IconlyBold.heart,
-                                  color: isFavoriteList[index]
-                                      ? AppColors.primaryGreen
-                                      : AppColors.secondaryLight,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: 20.0,
-                            left: 10.0,
-                            child: SimpleRating(rating: 4.2),
-                          ),
-                        ],
+                      return ProductCard(
+                        imagePath: DummyData.productsImage[index],
+                        productName: DummyData.productsName[index],
+                        productPrice: DummyData.productsPrice[index],
+                        height: 280.0,
+                        enableNewBadge: index % 2 == 0 ? true : false,
+                        productNameSize: 20.0,
+                        productPriceSize: 18.0,
+                        enableFavorite: true,
+                        imageHeight: 150.0,
+                        isFavorite: isFavoriteList[index],
+                        onFavoriteToggle: () {
+                          setState(() {
+                            isFavoriteList[index] = !isFavoriteList[index];
+                          });
+                        },
                       );
                     },
                   ),
@@ -334,11 +285,13 @@ class _HomePageState extends State<HomePage> {
                     height: 250.0,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: productsName.length,
-                      itemBuilder: (context, index) => ProductCardList(
-                        imagePath: productsImage[index],
-                        name: productsName[index],
-                        price: productsPrice[index],
+                      itemCount: DummyData.productsName.length,
+                      itemBuilder: (context, index) => ProductCard(
+                        imagePath: DummyData.productsImage[index],
+                        productName: DummyData.productsName[index],
+                        productPrice: DummyData.productsPrice[index],
+                        imageHeight: 130.0,
+                        enableNewBadge: index % 2 == 0 ? true : false,
                         width: 150.0,
                       ),
                       separatorBuilder: (BuildContext context, int index) {
