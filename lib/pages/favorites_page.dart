@@ -51,12 +51,29 @@ class _FavoritesPageState extends State<FavoritesPage> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(
-              IconlyLight.filter,
-              color: AppColors.primaryDark,
+          Padding(
+            padding: const EdgeInsets.only(right: AppSizes.kPaddingNormal),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    IconlyLight.filter,
+                    color: AppColors.primaryDark,
+                  ),
+                  onPressed: () {},
+                ),
+                Badge(
+                  label: Text(
+                    productsName.length.toString(),
+                  ),
+                  backgroundColor: AppColors.primaryGreen,
+                  child: Icon(
+                    IconlyLight.heart,
+                    color: AppColors.primaryDark,
+                  ),
+                ),
+              ],
             ),
-            onPressed: () {},
           ),
         ],
         backgroundColor: AppColors.lightBackgroundColor,

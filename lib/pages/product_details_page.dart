@@ -1,3 +1,4 @@
+import 'package:ecommerce/widgets/draggable_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/utils/app_colors.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -55,10 +56,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         backgroundColor: AppColors.lightBackgroundColor,
       ),
       body: Stack(
-        alignment: Alignment.topCenter,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 10.0),
+          Align(
+            alignment: Alignment.topCenter,
             child: Container(
               height: 300.0,
               width: 300.0,
@@ -70,193 +70,155 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               ),
             ),
           ),
-          Expanded(
-            child: DraggableScrollableSheet(
-              initialChildSize: 0.52,
-              minChildSize: 0.52,
-              maxChildSize: .85,
-              builder: (context, scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.0),
-                      topRight: Radius.circular(40.0),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
-                        spreadRadius: 10,
-                        blurRadius: 100,
-                        offset: Offset(0, 10),
-                      ),
-                    ],
+          DraggableSheet(
+            initialChildSize: 0.52,
+            minChildSize: 0.52,
+            maxChildSize: .85,
+            draggableSheetBody: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'HOODIE',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryGreen,
                   ),
-                  child: SingleChildScrollView(
-                    controller: scrollController,
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(
-                            child: Container(
-                              width: 100.0,
-                              height: 5.0,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade300,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
-                          Text(
-                            'HOODIE',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primaryGreen,
-                            ),
-                          ),
-                          Text(
-                            'Black Hoodie',
-                            style: TextStyle(
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
-                          Text(
-                            'Stay cozy and stylish with the Premium Fleece Hoodie. Crafted from a high-quality cotton blend, this hoodie offers warmth and comfort without sacrificing style. Featuring a spacious front pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit, it\'s perfect for layering during chilly days. Whether you\'re lounging at home or stepping out, this hoodie is a versatile must-have in your wardrobe. Available in a range of colors and sizes.',
-                            maxLines: 4,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: 20.0),
-                          Row(
-                            children: [
-                              Icon(
-                                IconlyBold.star,
-                                color: Colors.amber,
-                                size: 30.0,
-                              ),
-                              SizedBox(width: 10.0),
-                              Text(
-                                '4.5',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(width: 5.0),
-                              Text(
-                                '(89 Reviews)',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Price',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  Text(
-                                    '\$19.99',
-                                    style: TextStyle(
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.secondaryDark,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    padding: EdgeInsets.zero,
-                                    iconSize: 40.0,
-                                    icon: Icon(
-                                      HugeIcons.strokeRoundedRemoveSquare,
-                                      color: AppColors.primaryGreen,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  Text(
-                                    '1',
-                                    style: TextStyle(
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.secondaryDark,
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  IconButton(
-                                    padding: EdgeInsets.zero,
-                                    iconSize: 40.0,
-                                    icon: Icon(
-                                      HugeIcons.strokeRoundedPlusSignSquare,
-                                      color: AppColors.primaryGreen,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20.0),
-                          SizedBox(
-                            width: double.infinity,
-                            child: DottedLine(
-                              direction: Axis.horizontal,
-                              lineLength: double.infinity,
-                              dashLength: 4.0,
-                              dashColor: AppColors.primaryGreen,
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(
-                              'Customer reviews',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            trailing: Icon(
-                              IconlyLight.arrow_down_2,
-                              size: 30.0,
-                            ),
-                            contentPadding: EdgeInsets.zero,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: DottedLine(
-                              direction: Axis.horizontal,
-                              lineLength: double.infinity,
-                              dashLength: 4.0,
-                              dashColor: AppColors.primaryGreen,
-                            ),
-                          ),
-                        ],
+                ),
+                Text(
+                  'Black Hoodie',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  'Stay cozy and stylish with the Premium Fleece Hoodie. Crafted from a high-quality cotton blend, this hoodie offers warmth and comfort without sacrificing style. Featuring a spacious front pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit, it\'s perfect for layering during chilly days. Whether you\'re lounging at home or stepping out, this hoodie is a versatile must-have in your wardrobe. Available in a range of colors and sizes.',
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: 20.0),
+                Row(
+                  children: [
+                    Icon(
+                      IconlyBold.star,
+                      color: Colors.amber,
+                      size: 30.0,
+                    ),
+                    SizedBox(width: 10.0),
+                    Text(
+                      '4.5',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(width: 5.0),
+                    Text(
+                      '(89 Reviews)',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Price',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          '\$19.99',
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.secondaryDark,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 40.0,
+                          icon: Icon(
+                            HugeIcons.strokeRoundedRemoveSquare,
+                            color: AppColors.primaryDark,
+                          ),
+                          onPressed: () {},
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          '1',
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryDark,
+                          ),
+                        ),
+                        SizedBox(width: 10.0),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          iconSize: 40.0,
+                          icon: Icon(
+                            HugeIcons.strokeRoundedPlusSignSquare,
+                            color: AppColors.primaryDark,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.0),
+                SizedBox(
+                  width: double.infinity,
+                  child: DottedLine(
+                    direction: Axis.horizontal,
+                    lineLength: double.infinity,
+                    dashLength: 4.0,
+                    dashColor: AppColors.primaryGreen,
                   ),
-                );
-              },
+                ),
+                ListTile(
+                  title: Text(
+                    'Customer reviews',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: Icon(
+                    IconlyLight.arrow_down_2,
+                    size: 30.0,
+                  ),
+                  contentPadding: EdgeInsets.zero,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: DottedLine(
+                    direction: Axis.horizontal,
+                    lineLength: double.infinity,
+                    dashLength: 4.0,
+                    dashColor: AppColors.primaryGreen,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -312,7 +274,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: Row(
                 children: [
                   Icon(
-                    IconlyLight.bag,
+                    HugeIcons.strokeRoundedShoppingCart01,
                     color: Colors.white,
                     size: 30.0,
                   ),
