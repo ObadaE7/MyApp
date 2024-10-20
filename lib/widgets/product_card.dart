@@ -51,7 +51,7 @@ class ProductCard extends StatelessWidget {
             Image.asset(
               imagePath,
               height: isGrid ? 150.0 : 130.0,
-              width: isGrid ? double.infinity : 130.0,
+              width: isGrid ? double.infinity : 150.0,
               fit: BoxFit.contain,
             ),
             const SizedBox(height: AppSizes.kPaddingSmall),

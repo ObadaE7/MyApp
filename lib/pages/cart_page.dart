@@ -1,40 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce/utils/app_sizes.dart';
 import 'package:ecommerce/utils/app_colors.dart';
+import 'package:iconly/iconly.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // appBar: AppBar(
-        //   leading: IconButton(
-        //     icon: Icon(
-        //       HugeIcons.strokeRoundedArrowLeft04,
-        //       size: 30.0,
-        //     ),
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),
-        //   title: Text(
-        //     'Cart',
-        //   ),
-        //   centerTitle: true,
-        //   backgroundColor: AppColors.lightBackgroundColor,
-        // ),
-        body: Center(
-          child: Text(
-            'Cart Page',
-            style: TextStyle(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Cart',
+          style: TextStyle(
+            color: AppColors.primaryDark,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              IconlyLight.filter,
               color: AppColors.primaryDark,
-              fontSize: AppSizes.kTextSubheading,
             ),
+            onPressed: () {},
+          ),
+        ],
+        backgroundColor: AppColors.lightBackgroundColor,
+      ),
+      body: Center(
+        child: Text(
+          'Cart Page',
+          style: TextStyle(
+            color: AppColors.primaryDark,
+            fontSize: AppSizes.kTextSubheading,
           ),
         ),
       ),
+      backgroundColor: AppColors.lightBackgroundColor,
     );
   }
 }

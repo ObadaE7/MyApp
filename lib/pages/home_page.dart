@@ -1,3 +1,4 @@
+import 'package:ecommerce/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/widgets/product_card.dart';
 import 'package:ecommerce/widgets/promotion_banner.dart';
@@ -21,26 +22,6 @@ class _HomePageState extends State<HomePage> {
   final CarouselSliderController _carouselController =
       CarouselSliderController();
   late List<bool> isFavoriteList;
-
-  List<String> categoriesName = [
-    'All Items',
-    'Hoodies',
-    'T-Shirts',
-    'Shirts',
-    'Pants',
-    'Glasses',
-    'Watches',
-  ];
-
-  List<IconData> categoriesIcon = [
-    HugeIcons.strokeRoundedDashboardSquare02,
-    HugeIcons.strokeRoundedHoodie,
-    HugeIcons.strokeRoundedShirt01,
-    HugeIcons.strokeRoundedTShirt,
-    HugeIcons.strokeRoundedJoggerPants,
-    HugeIcons.strokeRoundedGlasses,
-    HugeIcons.strokeRoundedWatch01,
-  ];
 
   List<String> productsName = [
     'Men\'s Black hoodie',
@@ -277,48 +258,7 @@ class _HomePageState extends State<HomePage> {
                     showSeeAll: true,
                   ),
                   const SizedBox(height: AppSizes.kPaddingNormal),
-                  SizedBox(
-                    height: 50.0,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categoriesName.length,
-                      itemBuilder: (context, index) => Container(
-                        padding: const EdgeInsets.all(
-                          AppSizes.kPaddingSmall + 2.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: AppColors.primaryLight),
-                          borderRadius: BorderRadius.circular(
-                            AppSizes.kPaddingNormal,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            HugeIcon(
-                              icon: categoriesIcon[index],
-                              color: index == 0
-                                  ? AppColors.primaryGreen
-                                  : AppColors.primaryDark,
-                            ),
-                            const SizedBox(width: 10.0),
-                            Text(
-                              categoriesName[index],
-                              style: TextStyle(
-                                fontSize: AppSizes.kTextSubheading + 2.0,
-                                color: index == 0
-                                    ? AppColors.primaryGreen
-                                    : AppColors.primaryDark,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(width: AppSizes.kPaddingNormal);
-                      },
-                    ),
-                  ),
+                  CategoryCard(),
                   const SizedBox(height: AppSizes.kPaddingNormal),
                   GridView.builder(
                     padding: EdgeInsets.zero,
