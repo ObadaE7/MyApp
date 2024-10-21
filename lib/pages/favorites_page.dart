@@ -19,7 +19,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Wishlist',
+          'Favorites',
           style: TextStyle(
             color: AppColors.primaryDark,
           ),
@@ -77,7 +77,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 return ProductCard(
                   imagePath: DummyData.productsImage[index],
                   productName: DummyData.productsName[index],
-                  productPrice: DummyData.productsPrice[index],
+                  productPrice: DummyData.productsPrice[index].toString(),
                   height: 280.0,
                   isFavorite: true,
                   enableFavorite: true,

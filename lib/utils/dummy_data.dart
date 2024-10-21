@@ -17,12 +17,12 @@ class DummyData {
     'images/products/pants/pants-4.png',
   ];
 
-  static const List<String> productsPrice = [
-    '\$20.00',
-    '\$11.00',
-    '\$40.00',
-    '\$36.99',
-    '\$60.00',
-    '\$29.35',
+  static const List productsPrice = [
+    49.99,
+    24.99,
+    15.99,
+    79.99,
+    1499.00,
+    39.99,
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
+import 'package:ecommerce/utils/dummy_data.dart';
 import 'package:ecommerce/widgets/draggable_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/utils/app_sizes.dart';
@@ -14,39 +15,36 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<String> productsName = [
-    'Men\'s Black hoodie',
-    'Hawaiian shirt isolated',
-    'Plain dark green t-shirt',
-    'Light green front sunglasses with black',
-    'Rolex Yacht-Master',
-    'Cargo pants men with plain isolated',
-  ];
+  final List<int> _quantities = List<int>.generate(
+    DummyData.productsName.length,
+    (index) => 1,
+  );
+  final double _discountPercentage = 10;
+  double _calculateTotal() {
+    double total = 0;
+    for (int i = 0; i < DummyData.productsName.length; i++) {
+      total += DummyData.productsPrice[i] * _quantities[i];
+    }
+    return total;
+  }
 
-  List<String> productsImage = [
-    'images/products/hoodies/hoodie-1.png',
-    'images/products/shirts/shirt-4.png',
-    'images/products/t-shirts/t-shirt-5.png',
-    'images/products/glasses/glasses-3.png',
-    'images/products/watches/watch-2.png',
-    'images/products/pants/pants-4.png',
-  ];
+  double _calculateDiscount() {
+    double total = _calculateTotal();
+    return total * (_discountPercentage / 100);
+  }
 
-  List<String> productsPrice = [
-    '\$20.00',
-    '\$11.00',
-    '\$40.00',
-    '\$36.99',
-    '\$60.00',
-    '\$29.35',
-  ];
+  double _calculateTotalWithDiscount() {
+    double total = _calculateTotal();
+    double discountAmount = _calculateDiscount();
+    return total - discountAmount;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Cart',
+          'Cart',
           style: TextStyle(
             color: AppColors.primaryDark,
           ),
@@ -65,7 +63,7 @@ class _CartPageState extends State<CartPage> {
                 ),
                 Badge(
                   label: Text(
-                    productsName.length.toString(),
+                    DummyData.productsName.length.toString(),
                   ),
                   backgroundColor: AppColors.primaryGreen,
                   child: Icon(
@@ -88,89 +86,201 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: const EdgeInsets.all(AppSizes.kPaddingNormal),
                   child: ListView.builder(
-                    itemCount: productsName.length,
+                    itemCount: DummyData.productsName.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height: 120.0,
-                                padding: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    AppSizes.kBorderRadiusNormal,
-                                  ),
-                                  color: AppColors.primaryGreen.withOpacity(.1),
-                                ),
-                                child: Image.asset(
-                                  productsImage[index],
-                                  fit: BoxFit.contain,
-                                ),
+                      bool isQuantityGreaterThanZero =
+                          _quantities[index] > 1 ? true : false;
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: AppSizes.kPaddingNormal,
+                        ),
+                        child: Dismissible(
+                          key: UniqueKey(),
+                          // key: Key(index.toString()),
+                          onDismissed: (direction) {
+                            setState(() {});
+                          },
+                          background: Container(
+                            padding: const EdgeInsets.only(
+                              right: AppSizes.kPaddingLarge,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                AppSizes.kBorderRadiusNormal,
                               ),
-                              const SizedBox(width: AppSizes.kPaddingNormal),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Text(
-                                      productsName[index],
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: AppSizes.kTextSubheading,
-                                        color: AppColors.primaryDark,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: AppSizes.kPaddingNormal),
-                                  Text(
-                                    productsPrice[index],
-                                    style: TextStyle(
-                                      fontSize: AppSizes.kTextSubheading,
-                                      color: AppColors.primaryGreen,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Column(
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      HugeIcons.strokeRoundedPlusSignSquare,
-                                      color: AppColors.primaryDark,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                  Text('1'),
-                                  IconButton(
-                                    icon: Icon(
-                                      HugeIcons.strokeRoundedMinusSignSquare,
-                                      color: AppColors.primaryDark,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          if (index != productsName.length - 1)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: AppSizes.kPaddingNormal,
-                              ),
-                              child: DottedLine(
-                                dashColor: AppColors.primaryGreen,
-                                dashGapLength: 5.0,
+                              color: Colors.red,
+                            ),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Icon(
+                                HugeIcons.strokeRoundedDelete02,
+                                color: Colors.white,
+                                size: 30,
                               ),
                             ),
-                        ],
+                          ),
+                          direction: DismissDirection.endToStart,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.all(
+                              AppSizes.kPaddingSmall,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryGreen.withOpacity(.1),
+                              borderRadius: BorderRadius.circular(
+                                AppSizes.kBorderRadiusNormal,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  padding:
+                                      EdgeInsets.all(AppSizes.kPaddingSmall),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      AppSizes.kBorderRadiusNormal,
+                                    ),
+                                    color: Colors.white.withOpacity(.7),
+                                  ),
+                                  child: Image.asset(
+                                    DummyData.productsImage[index],
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                const SizedBox(width: AppSizes.kPaddingNormal),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.6,
+                                      child: Text(
+                                        DummyData.productsName[index],
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: AppSizes.kTextSubheading,
+                                          color: AppColors.primaryDark,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: AppSizes.kPaddingNormal),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.6,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '\$${DummyData.productsPrice[index]}',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      isQuantityGreaterThanZero
+                                                          ? AppSizes.kTextSmall
+                                                          : AppSizes
+                                                              .kTextSubheading,
+                                                  color:
+                                                      isQuantityGreaterThanZero
+                                                          ? AppColors
+                                                              .primaryDark
+                                                          : AppColors
+                                                              .primaryGreen,
+                                                  decoration:
+                                                      isQuantityGreaterThanZero
+                                                          ? TextDecoration
+                                                              .lineThrough
+                                                          : null,
+                                                ),
+                                              ),
+                                              if (isQuantityGreaterThanZero)
+                                                Text(
+                                                  '\$${(DummyData.productsPrice[index] * _quantities[index]).toStringAsFixed(2)}',
+                                                  style: TextStyle(
+                                                    fontSize: AppSizes
+                                                        .kTextSubheading,
+                                                    color:
+                                                        AppColors.primaryGreen,
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                AppSizes.kBorderRadiusNormal,
+                                              ),
+                                              color:
+                                                  Colors.white.withOpacity(.7),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                IconButton(
+                                                  tooltip: 'Decrease quantity',
+                                                  icon: Icon(
+                                                    HugeIcons
+                                                        .strokeRoundedMinusSign,
+                                                    color:
+                                                        isQuantityGreaterThanZero
+                                                            ? AppColors
+                                                                .primaryDark
+                                                            : AppColors
+                                                                .primaryLight,
+                                                  ),
+                                                  onPressed:
+                                                      isQuantityGreaterThanZero
+                                                          ? () {
+                                                              setState(() {
+                                                                _quantities[
+                                                                    index]--;
+                                                              });
+                                                            }
+                                                          : null,
+                                                ),
+                                                Text(
+                                                  _quantities[index].toString(),
+                                                  style: TextStyle(
+                                                    fontSize: AppSizes
+                                                        .kTextSubheading,
+                                                    color:
+                                                        AppColors.primaryDark,
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  tooltip: 'Increase quantity',
+                                                  icon: Icon(
+                                                    HugeIcons
+                                                        .strokeRoundedPlusSign,
+                                                    color:
+                                                        AppColors.primaryDark,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _quantities[index]++;
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -195,7 +305,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ),
                     Text(
-                      '\$120.00',
+                      '\$${_calculateTotal().toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: AppSizes.kTextSubheading + 2.0,
                         color: AppColors.primaryDark,
@@ -215,7 +325,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ),
                     Text(
-                      '-\$3.00',
+                      '-\$${_calculateDiscount().toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: AppSizes.kTextSubheading + 2.0,
                         color: AppColors.primaryDark,
@@ -243,7 +353,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ),
                     Text(
-                      '\$117.00',
+                      '\$${_calculateTotalWithDiscount().toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: AppSizes.kTextSubheading + 2.0,
                         color: AppColors.primaryDark,

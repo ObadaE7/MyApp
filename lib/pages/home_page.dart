@@ -251,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                       return ProductCard(
                         imagePath: DummyData.productsImage[index],
                         productName: DummyData.productsName[index],
-                        productPrice: DummyData.productsPrice[index],
+                        productPrice: DummyData.productsPrice[index].toString(),
                         height: 280.0,
                         enableNewBadge: index % 2 == 0 ? true : false,
                         productNameSize: 20.0,
@@ -289,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) => ProductCard(
                         imagePath: DummyData.productsImage[index],
                         productName: DummyData.productsName[index],
-                        productPrice: DummyData.productsPrice[index],
+                        productPrice: DummyData.productsPrice[index].toString(),
                         imageHeight: 130.0,
                         enableNewBadge: index % 2 == 0 ? true : false,
                         width: 150.0,
